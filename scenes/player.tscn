@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://baqsc14a5pdfv"]
+
+[ext_resource type="Texture2D" uid="uid://dvpn1gbp5l028" path="res://icon.svg" id="1_l4jx1"]
+[ext_resource type="Script" path="res://scripts/PlayerMovement.cs" id="2_ftxwf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q0h8b"]
+
+[node name="Player_CharacterBody2D" type="CharacterBody2D"]
+scale = Vector2(1, 1.02038)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_q0h8b")
+
+[node name="CharacterSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -1.90735e-06)
+scale = Vector2(0.156173, 0.156173)
+texture = ExtResource("1_l4jx1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="PlayerMovement" type="Node" parent="." node_paths=PackedStringArray("playerBody")]
+script = ExtResource("2_ftxwf")
+playerBody = NodePath("..")
+maxSpeed = 300.0
+acceleration = 1000.0
+jumpStrength = 500.0
