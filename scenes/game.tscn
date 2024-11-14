@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://yui3ank1kemj"]
+[gd_scene load_steps=6 format=4 uid="uid://yui3ank1kemj"]
 
 [ext_resource type="Texture2D" uid="uid://dvpn1gbp5l028" path="res://icon.svg" id="1_f14jq"]
 [ext_resource type="PackedScene" uid="uid://baqsc14a5pdfv" path="res://scenes/player.tscn" id="2_ojqwa"]
+[ext_resource type="AudioStream" uid="uid://dpjotmh0d5yt5" path="res://game_music/idle_music.mp3" id="3_1teve"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_egm2y"]
 texture = ExtResource("1_f14jq")
@@ -212,3 +213,7 @@ tile_set = SubResource("TileSet_xbj1j")
 
 [node name="Player_CharacterBody2D" parent="." instance=ExtResource("2_ojqwa")]
 position = Vector2(33, -30)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1teve")
+autoplay = true
