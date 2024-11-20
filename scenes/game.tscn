@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://yui3ank1kemj"]
+[gd_scene load_steps=9 format=4 uid="uid://yui3ank1kemj"]
 
 [ext_resource type="Texture2D" uid="uid://dvpn1gbp5l028" path="res://icon.svg" id="1_f14jq"]
+[ext_resource type="Script" path="res://scripts/KeyManager.cs" id="1_rfa2q"]
 [ext_resource type="PackedScene" uid="uid://baqsc14a5pdfv" path="res://scenes/player.tscn" id="2_ojqwa"]
 [ext_resource type="AudioStream" uid="uid://dpjotmh0d5yt5" path="res://game_music/idle_music.mp3" id="3_1teve"]
+[ext_resource type="PackedScene" uid="uid://b2ibgtu4jqmy4" path="res://scenes/key.tscn" id="4_rhcao"]
+[ext_resource type="PackedScene" uid="uid://df6y1vqi4epwc" path="res://scenes/door.tscn" id="6_4wbn3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_egm2y"]
 texture = ExtResource("1_f14jq")
@@ -205,6 +208,11 @@ sources/0 = SubResource("TileSetAtlasSource_egm2y")
 
 [node name="Game" type="Node2D"]
 
+[node name="Managers" type="Node" parent="."]
+
+[node name="KeyManager" type="Node" parent="Managers"]
+script = ExtResource("1_rfa2q")
+
 [node name="Environment" type="Node2D" parent="."]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Environment"]
@@ -217,3 +225,11 @@ position = Vector2(33, -30)
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_1teve")
 autoplay = true
+
+[node name="KeyBody" parent="." node_paths=PackedStringArray("keyManager") instance=ExtResource("4_rhcao")]
+position = Vector2(218, -26)
+keyManager = NodePath("../Managers/KeyManager")
+
+[node name="Door" parent="." node_paths=PackedStringArray("keyManager") instance=ExtResource("6_4wbn3")]
+position = Vector2(110, -26)
+keyManager = NodePath("../Managers/KeyManager")
