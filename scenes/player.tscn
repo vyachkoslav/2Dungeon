@@ -203,12 +203,11 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yg1v0"]
-radius = 11.0
-height = 31.3609
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kdmn"]
+size = Vector2(24.7487, 30.942)
 
 [node name="Player_CharacterBody2D" type="CharacterBody2D"]
-scale = Vector2(1, 1.02038)
+scale = Vector2(0.8, 0.816)
 script = ExtResource("1_mf7c5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -216,9 +215,8 @@ sprite_frames = SubResource("SpriteFrames_70ote")
 animation = &"fall"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -0.980027)
-shape = SubResource("CapsuleShape2D_yg1v0")
+position = Vector2(-0.528016, 0.526031)
+shape = SubResource("RectangleShape2D_0kdmn")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true

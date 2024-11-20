@@ -1,55 +1,46 @@
 [gd_scene load_steps=7 format=3 uid="uid://df6y1vqi4epwc"]
 
 [ext_resource type="Script" path="res://scripts/Door.cs" id="1_12hgs"]
+[ext_resource type="Texture2D" uid="uid://1b2ftem3cd4w" path="res://art/Dungeon Tile Set.png" id="2_5goux"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_th11n"]
+size = Vector2(7.23685, 10)
 
-[sub_resource type="Gradient" id="Gradient_4ogpx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7y8r2"]
+atlas = ExtResource("2_5goux")
+region = Rect2(208, 160, 16, 32)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_phjjo"]
-gradient = SubResource("Gradient_4ogpx")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3wpmv"]
+size = Vector2(3, 10)
 
-[sub_resource type="Gradient" id="Gradient_ne84n"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhbek"]
+atlas = ExtResource("2_5goux")
+region = Rect2(192, 160, 16, 32)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_b4106"]
-gradient = SubResource("Gradient_ne84n")
-
-[node name="Door" type="Area2D" node_paths=PackedStringArray("doorPhysicsBody")]
+[node name="Door" type="Area2D" node_paths=PackedStringArray("doorPhysicsBody", "openedDoor", "closedDoor")]
 position = Vector2(110, -33)
 script = ExtResource("1_12hgs")
 doorPhysicsBody = NodePath("StaticBody2D")
+openedDoor = NodePath("OpenSprite")
+closedDoor = NodePath("StaticBody2D/ClosedSprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 0)
 scale = Vector2(1.52, 1)
 shape = SubResource("RectangleShape2D_th11n")
 
 [node name="OpenSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.315, 0.315)
-texture = SubResource("GradientTexture2D_phjjo")
-
-[node name="Label" type="Label" parent="OpenSprite"]
-offset_left = -22.2222
-offset_top = -12.6984
-offset_right = 25.7778
-offset_bottom = 10.3016
-text = "OPEN
-"
-metadata/_edit_use_anchors_ = true
+visible = false
+position = Vector2(0.740002, 0)
+scale = Vector2(0.4075, 0.315)
+texture = SubResource("AtlasTexture_7y8r2")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_th11n")
+position = Vector2(-1.5, 0)
+shape = SubResource("RectangleShape2D_3wpmv")
 
 [node name="ClosedSprite" type="Sprite2D" parent="StaticBody2D"]
 scale = Vector2(0.315, 0.315)
-texture = SubResource("GradientTexture2D_b4106")
-
-[node name="Label" type="Label" parent="StaticBody2D/ClosedSprite"]
-offset_left = -28.5714
-offset_top = -12.6984
-offset_right = 32.4286
-offset_bottom = 10.3016
-text = "CLOSED"
-metadata/_edit_use_anchors_ = true
+texture = SubResource("AtlasTexture_uhbek")
