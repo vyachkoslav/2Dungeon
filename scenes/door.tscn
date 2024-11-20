@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://df6y1vqi4epwc"]
+
+[ext_resource type="Script" path="res://scripts/Door.cs" id="1_12hgs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_th11n"]
+
+[sub_resource type="Gradient" id="Gradient_4ogpx"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_phjjo"]
+gradient = SubResource("Gradient_4ogpx")
+
+[sub_resource type="Gradient" id="Gradient_ne84n"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_b4106"]
+gradient = SubResource("Gradient_ne84n")
+
+[node name="Door" type="Area2D" node_paths=PackedStringArray("doorPhysicsBody")]
+position = Vector2(110, -33)
+script = ExtResource("1_12hgs")
+doorPhysicsBody = NodePath("StaticBody2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.52, 1)
+shape = SubResource("RectangleShape2D_th11n")
+
+[node name="OpenSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.315, 0.315)
+texture = SubResource("GradientTexture2D_phjjo")
+
+[node name="Label" type="Label" parent="OpenSprite"]
+offset_left = -22.2222
+offset_top = -12.6984
+offset_right = 25.7778
+offset_bottom = 10.3016
+text = "OPEN
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_th11n")
+
+[node name="ClosedSprite" type="Sprite2D" parent="StaticBody2D"]
+scale = Vector2(0.315, 0.315)
+texture = SubResource("GradientTexture2D_b4106")
+
+[node name="Label" type="Label" parent="StaticBody2D/ClosedSprite"]
+offset_left = -28.5714
+offset_top = -12.6984
+offset_right = 32.4286
+offset_bottom = 10.3016
+text = "CLOSED"
+metadata/_edit_use_anchors_ = true
