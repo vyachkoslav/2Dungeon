@@ -12,11 +12,6 @@ public partial class PlayerMovement : Node
 	[Export] private float jumpStrength;
 
 	private int xControl;
-	
-	public override void _Process(double delta)
-	{
-		playerBody.MoveAndSlide();
-	}
 
     public override void _PhysicsProcess(double delta)
     {
