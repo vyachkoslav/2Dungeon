@@ -1,17 +1,18 @@
 extends CharacterBody2D
 
-func _jumpanimation() -> void:
+func jump_animation() -> void:
 	$AnimatedSprite2D.play("jump")
 	$AnimatedSprite2D.play("jump_loop")
 	
 	
-func _fallanimation() -> void:
+func fall_animation() -> void:
 	$AnimatedSprite2D.play("fall")
 	$AnimatedSprite2D.play("fall_loop")
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
+	move_and_slide()
 	
 	if velocity.x > 0:
 		$AnimatedSprite2D.scale.x = 1
@@ -23,6 +24,6 @@ func _process(delta: float) -> void:
 		$AnimatedSprite2D.play("idle")
 		
 	if velocity.y < 0 and !is_on_floor():
-		_jumpanimation()
+		jump_animation()
 	elif velocity.y > 0 and !is_on_floor():
-		_fallanimation()
+		fall_animation()
