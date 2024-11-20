@@ -13,8 +13,8 @@ public partial class PlayerMovement : Node
 
 	private int xControl;
 
-    public override void _PhysicsProcess(double delta)
-    {
+	public override void _PhysicsProcess(double delta)
+	{
 		Vector2 velocity = playerBody.Velocity;
 		if(xControl == 0)
 			velocity.X = Mathf.MoveToward(velocity.X, 0, acceleration * (float)delta);
@@ -26,13 +26,13 @@ public partial class PlayerMovement : Node
 			velocity.Y = -jumpStrength;
 		}
 
-	    velocity += playerBody.GetGravity() * (float)delta;
+		velocity += playerBody.GetGravity() * (float)delta;
 		playerBody.Velocity = velocity;
-    }
+	}
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-	    if (@event.IsActionPressed(ForwardAction))
+		if (@event.IsActionPressed(ForwardAction))
 		{
 			xControl = 1;
 		}

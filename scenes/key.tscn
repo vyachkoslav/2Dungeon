@@ -1,28 +1,22 @@
 [gd_scene load_steps=5 format=3 uid="uid://b2ibgtu4jqmy4"]
 
 [ext_resource type="Script" path="res://scripts/Key.cs" id="1_ladyr"]
+[ext_resource type="Texture2D" uid="uid://1b2ftem3cd4w" path="res://art/Dungeon Tile Set.png" id="2_uha0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_th11n"]
+size = Vector2(4.07353, 2.80503)
 
-[sub_resource type="Gradient" id="Gradient_ne84n"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_b4106"]
-gradient = SubResource("Gradient_ne84n")
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwwgv"]
+atlas = ExtResource("2_uha0r")
+region = Rect2(176, 144, 16, 16)
 
 [node name="KeyBody" type="Area2D"]
-position = Vector2(146, -33)
 script = ExtResource("1_ladyr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.150726, 0.402512)
 shape = SubResource("RectangleShape2D_th11n")
 
 [node name="KeySprite" type="Sprite2D" parent="."]
 scale = Vector2(0.315, 0.315)
-texture = SubResource("GradientTexture2D_b4106")
-
-[node name="Label" type="Label" parent="KeySprite"]
-offset_left = -15.873
-offset_top = -12.6984
-offset_right = 24.127
-offset_bottom = 10.3016
-text = "KEY"
+texture = SubResource("AtlasTexture_uwwgv")
