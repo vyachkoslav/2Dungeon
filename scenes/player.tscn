@@ -1,10 +1,11 @@
-[gd_scene load_steps=31 format=3 uid="uid://baqsc14a5pdfv"]
+[gd_scene load_steps=32 format=3 uid="uid://baqsc14a5pdfv"]
 
 [ext_resource type="Script" path="res://scripts/PlayerAnimations.gd" id="1_mf7c5"]
 [ext_resource type="Texture2D" uid="uid://b222scfefglem" path="res://art/player_animations/jump/player_jump.png" id="1_oh3tj"]
-[ext_resource type="Script" path="res://scripts/PlayerMovement.cs" id="2_ftxwf"]
 [ext_resource type="Texture2D" uid="uid://bulfxol6l1r0r" path="res://art/player_animations/idle/player_idle.png" id="2_uy7vs"]
 [ext_resource type="Texture2D" uid="uid://blryjfb32ev8o" path="res://art/player_animations/run/player_run.png" id="3_37usk"]
+[ext_resource type="Script" path="res://scripts/Movement.cs" id="5_wrwg8"]
+[ext_resource type="Script" path="res://scripts/PlayerControlsProvider.cs" id="6_1td04"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1k7ct"]
 atlas = ExtResource("1_oh3tj")
@@ -227,9 +228,13 @@ position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
-[node name="PlayerMovement" type="Node" parent="." node_paths=PackedStringArray("playerBody")]
-script = ExtResource("2_ftxwf")
-playerBody = NodePath("..")
+[node name="Movement" type="Node" parent="." node_paths=PackedStringArray("body", "controls")]
+script = ExtResource("5_wrwg8")
+body = NodePath("..")
+controls = NodePath("PlayerControlsProvider")
 maxSpeed = 300.0
 acceleration = 1000.0
 jumpStrength = 500.0
+
+[node name="PlayerControlsProvider" type="Node" parent="Movement"]
+script = ExtResource("6_1td04")
