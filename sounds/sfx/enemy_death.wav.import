@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://bvpmjargkyd23"
-path="res://.godot/imported/door_open.wav-3ef088a37a02b77f4832ed2af684db84.sample"
+uid="uid://iwwv2o6cu6pk"
+path="res://.godot/imported/enemy_death.wav-c8bcc40576c3f6edf85747ffc5b47f4d.sample"
 
 [deps]
 
-source_file="res://sound_effects/door_open.wav"
-dest_files=["res://.godot/imported/door_open.wav-3ef088a37a02b77f4832ed2af684db84.sample"]
+source_file="res://sounds/sfx/enemy_death.wav"
+dest_files=["res://.godot/imported/enemy_death.wav-c8bcc40576c3f6edf85747ffc5b47f4d.sample"]
 
 [params]
 
