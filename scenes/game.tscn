@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://scripts/KeyManager.cs" id="1_rfa2q"]
 [ext_resource type="PackedScene" uid="uid://baqsc14a5pdfv" path="res://scenes/player.tscn" id="2_ojqwa"]
 [ext_resource type="AudioStream" uid="uid://dpjotmh0d5yt5" path="res://sounds/music/idle_music.mp3" id="3_1teve"]
-[ext_resource type="PackedScene" path="res://scenes/key.tscn" id="4_rhcao"]
-[ext_resource type="PackedScene" path="res://scenes/door.tscn" id="6_4wbn3"]
+[ext_resource type="PackedScene" uid="uid://cpv2so5nfvm3" path="res://scenes/key.tscn" id="4_rhcao"]
+[ext_resource type="PackedScene" uid="uid://d1crvgavmwo2l" path="res://scenes/door.tscn" id="6_4wbn3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_egm2y"]
 texture = ExtResource("1_f14jq")
