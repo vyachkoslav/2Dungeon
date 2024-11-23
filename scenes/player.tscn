@@ -1,10 +1,19 @@
-[gd_scene load_steps=31 format=3 uid="uid://baqsc14a5pdfv"]
+[gd_scene load_steps=34 format=3 uid="uid://baqsc14a5pdfv"]
 
+<<<<<<< Updated upstream
 [ext_resource type="Script" path="res://PlayerAnimations.gd" id="1_mf7c5"]
 [ext_resource type="Texture2D" uid="uid://b222scfefglem" path="res://player_animations/jump/player_jump.png" id="1_oh3tj"]
 [ext_resource type="Script" path="res://scripts/PlayerMovement.cs" id="2_ftxwf"]
 [ext_resource type="Texture2D" uid="uid://bulfxol6l1r0r" path="res://player_animations/idle/player_idle.png" id="2_uy7vs"]
 [ext_resource type="Texture2D" uid="uid://blryjfb32ev8o" path="res://player_animations/run/player_run.png" id="3_37usk"]
+=======
+[ext_resource type="Script" path="res://scripts/PlayerScripts.gd" id="1_mf7c5"]
+[ext_resource type="Texture2D" uid="uid://b222scfefglem" path="res://art/player_animations/jump/player_jump.png" id="1_oh3tj"]
+[ext_resource type="Script" path="res://scripts/PlayerMovement.cs" id="2_ftxwf"]
+[ext_resource type="Texture2D" uid="uid://bulfxol6l1r0r" path="res://art/player_animations/idle/player_idle.png" id="2_uy7vs"]
+[ext_resource type="Texture2D" uid="uid://blryjfb32ev8o" path="res://art/player_animations/run/player_run.png" id="3_37usk"]
+[ext_resource type="Texture2D" uid="uid://mka6mlghyhuu" path="res://art/player_animations/hurt/player_hurt.png" id="3_er26k"]
+>>>>>>> Stashed changes
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1k7ct"]
 atlas = ExtResource("1_oh3tj")
@@ -21,6 +30,14 @@ region = Rect2(64, 32, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_747rn"]
 atlas = ExtResource("1_oh3tj")
 region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgyv8"]
+atlas = ExtResource("3_er26k")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gv11c"]
+atlas = ExtResource("3_er26k")
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ubsqo"]
 atlas = ExtResource("2_uy7vs")
@@ -124,6 +141,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_bgyv8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gv11c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gv11c")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ubsqo")
 }, {
 "duration": 1.0,
@@ -206,13 +237,21 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0kdmn"]
 size = Vector2(24.7487, 30.942)
 
+<<<<<<< Updated upstream
 [node name="Player_CharacterBody2D" type="CharacterBody2D"]
+scale = Vector2(1, 1.02038)
+=======
+[node name="Player_CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("hearts")]
 scale = Vector2(0.8, 0.816)
+>>>>>>> Stashed changes
 script = ExtResource("1_mf7c5")
+hearts = [null, null, null]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_70ote")
-animation = &"fall"
+animation = &"hurt"
+frame = 2
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.528016, 0.526031)
