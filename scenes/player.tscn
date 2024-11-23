@@ -229,13 +229,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0kdmn"]
 size = Vector2(24.7487, 30.942)
 
-<<<<<<< Updated upstream
-[node name="Player_CharacterBody2D" type="CharacterBody2D"]
-scale = Vector2(1, 1.02038)
-=======
 [node name="Player_CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("hearts")]
 scale = Vector2(0.8, 0.816)
->>>>>>> Stashed changes
 script = ExtResource("1_mf7c5")
 hearts = [null, null, null]
 
