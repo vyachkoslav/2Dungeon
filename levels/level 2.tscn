@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=4 uid="uid://660rptxlg7dj"]
+[gd_scene load_steps=19 format=4 uid="uid://660rptxlg7dj"]
 
-[ext_resource type="PackedScene" uid="uid://df6y1vqi4epwc" path="res://scenes/door.tscn" id="1_7dvok"]
-[ext_resource type="Texture2D" uid="uid://1b2ftem3cd4w" path="res://art/Dungeon Tile Set.png" id="1_cx8dk"]
-[ext_resource type="PackedScene" uid="uid://baqsc14a5pdfv" path="res://scenes/player.tscn" id="2_diij4"]
-[ext_resource type="PackedScene" uid="uid://b2ibgtu4jqmy4" path="res://scenes/key.tscn" id="3_1myse"]
-[ext_resource type="AudioStream" uid="uid://dpjotmh0d5yt5" path="res://game_music/idle_music.mp3" id="3_k28yh"]
-[ext_resource type="Script" path="res://scripts/KeyManager.cs" id="6_u0yps"]
+[ext_resource type="PackedScene" uid="uid://d1crvgavmwo2l" path="res://scenes/door.tscn" id="1_g6ddo"]
+[ext_resource type="Texture2D" uid="uid://1b2ftem3cd4w" path="res://art/Dungeon Tile Set.png" id="2_1v741"]
+[ext_resource type="PackedScene" uid="uid://cpv2so5nfvm3" path="res://scenes/key.tscn" id="3_dgbx1"]
+[ext_resource type="PackedScene" uid="uid://baqsc14a5pdfv" path="res://scenes/player.tscn" id="4_ebtjq"]
+[ext_resource type="AudioStream" uid="uid://dpjotmh0d5yt5" path="res://sounds/music/idle_music.mp3" id="5_7701s"]
+[ext_resource type="Script" path="res://scripts/KeyManager.cs" id="6_jmcvf"]
+[ext_resource type="Script" path="res://scripts/Traps.gd" id="7_nkn2v"]
+[ext_resource type="Texture2D" uid="uid://d0y7d23eiiawh" path="res://art/Sprite_heart.png" id="8_q7237"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10ysk"]
 texture = ExtResource("1_cx8dk")
@@ -185,6 +187,31 @@ texture = ExtResource("1_cx8dk")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_10ysk")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lyof2"]
+size = Vector2(34, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k70kb"]
+size = Vector2(17, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_18tyr"]
+size = Vector2(10, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fp6ff"]
+size = Vector2(10, 81)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hwuwm"]
+size = Vector2(50, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i73yc"]
+size = Vector2(353, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8w100"]
+size = Vector2(42, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glyym"]
+atlas = ExtResource("2_1v741")
+region = Rect2(176, 144, 16, 16)
+
 [node name="Game" type="Node2D"]
 
 [node name="Environment" type="Node2D" parent="."]
@@ -206,8 +233,9 @@ position = Vector2(306, -117)
 scale = Vector2(3.45605, 3.45605)
 keyManager = NodePath("../../Managers/KeyManager")
 
-[node name="Player_CharacterBody2D" parent="." instance=ExtResource("2_diij4")]
-position = Vector2(304.747, -161.248)
+[node name="Player_CharacterBody2D" parent="." node_paths=PackedStringArray("hearts") instance=ExtResource("4_ebtjq")]
+position = Vector2(96, -161)
+hearts = [NodePath("../CanvasLayer/Hearts/HBoxContainer/heart"), NodePath("../CanvasLayer/Hearts/HBoxContainer/heart3"), NodePath("../CanvasLayer/Hearts/HBoxContainer/heart2")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_k28yh")
@@ -216,4 +244,123 @@ autoplay = true
 [node name="Managers" type="Node" parent="."]
 
 [node name="KeyManager" type="Node" parent="Managers"]
-script = ExtResource("6_u0yps")
+script = ExtResource("6_jmcvf")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("7_nkn2v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(602, -15)
+shape = SubResource("RectangleShape2D_lyof2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(673.5, -15)
+shape = SubResource("RectangleShape2D_k70kb")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(127, -74)
+shape = SubResource("RectangleShape2D_18tyr")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(181, -98.5)
+shape = SubResource("RectangleShape2D_fp6ff")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(786, -15)
+shape = SubResource("RectangleShape2D_hwuwm")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1529.5, -15)
+shape = SubResource("RectangleShape2D_i73yc")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1154, -18.5)
+shape = SubResource("RectangleShape2D_8w100")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1154, -50)
+shape = SubResource("RectangleShape2D_8w100")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hearts" type="Panel" parent="CanvasLayer"]
+offset_left = 100.0
+offset_top = 50.0
+offset_right = 263.0
+offset_bottom = 90.0
+scale = Vector2(1.5, 1.5)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Hearts"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.5
+offset_top = -20.0
+offset_right = 69.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="heart" type="TextureRect" parent="CanvasLayer/Hearts/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("8_q7237")
+expand_mode = 2
+
+[node name="heart3" type="TextureRect" parent="CanvasLayer/Hearts/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("8_q7237")
+expand_mode = 2
+
+[node name="heart2" type="TextureRect" parent="CanvasLayer/Hearts/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("8_q7237")
+expand_mode = 2
+
+[node name="Pause" type="Panel" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -140.0
+offset_top = 50.0
+offset_right = -100.0
+offset_bottom = 90.0
+grow_horizontal = 0
+scale = Vector2(1.5, 1.5)
+
+[node name="PauseButton" type="Button" parent="CanvasLayer/Pause"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "PAUSE"
+
+[node name="Key" type="Panel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -510.0
+offset_top = 50.0
+offset_right = -421.0
+offset_bottom = 115.0
+grow_horizontal = 2
+
+[node name="key" type="TextureRect" parent="CanvasLayer/Key"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -42.0
+offset_right = 48.5
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_glyym")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
