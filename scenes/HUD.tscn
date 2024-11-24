@@ -9,16 +9,16 @@ region = Rect2(176, 144, 16, 16)
 
 [node name="HUD" type="Node2D"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="Hearts" type="Panel" parent="CanvasLayer"]
+[node name="Hearts" type="Panel" parent="HUD"]
 offset_left = 100.0
 offset_top = 50.0
 offset_right = 263.0
 offset_bottom = 90.0
 scale = Vector2(1.5, 1.5)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Hearts"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Hearts"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -32,23 +32,23 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="heart" type="TextureRect" parent="CanvasLayer/Hearts/HBoxContainer"]
+[node name="heart" type="TextureRect" parent="HUD/Hearts/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("1_w5rmn")
 expand_mode = 2
 
-[node name="heart3" type="TextureRect" parent="CanvasLayer/Hearts/HBoxContainer"]
+[node name="heart3" type="TextureRect" parent="HUD/Hearts/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("1_w5rmn")
 expand_mode = 2
 
-[node name="heart2" type="TextureRect" parent="CanvasLayer/Hearts/HBoxContainer"]
+[node name="heart2" type="TextureRect" parent="HUD/Hearts/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("1_w5rmn")
 expand_mode = 2
 
-[node name="Pause" type="Panel" parent="CanvasLayer"]
+[node name="Pause" type="Panel" parent="HUD"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -59,13 +59,13 @@ offset_bottom = 90.0
 grow_horizontal = 0
 scale = Vector2(1.5, 1.5)
 
-[node name="PauseButton" type="Button" parent="CanvasLayer/Pause"]
+[node name="PauseButton" type="Button" parent="HUD/Pause"]
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 text = "PAUSE"
 
-[node name="Key" type="Panel" parent="CanvasLayer"]
+[node name="Key" type="Panel" parent="HUD"]
 visible = false
 anchors_preset = 5
 anchor_left = 0.5
@@ -76,7 +76,7 @@ offset_right = -421.0
 offset_bottom = 115.0
 grow_horizontal = 2
 
-[node name="key" type="TextureRect" parent="CanvasLayer/Key"]
+[node name="key" type="TextureRect" parent="HUD/Key"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
