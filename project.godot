@@ -25,6 +25,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="2Dungeon"
 
+[global_group]
+
+Player=""
+
 [input]
 
 forward={

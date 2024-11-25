@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://8oxka15kc5ky"]
+[gd_scene load_steps=6 format=3 uid="uid://8oxka15kc5ky"]
 
 [ext_resource type="Script" path="res://scripts/GameStateHandler.gd" id="1_xulbl"]
 [ext_resource type="Texture2D" uid="uid://cxhijhhbftmvl" path="res://art/dungeon background 7.png" id="2_xw8ov"]
+[ext_resource type="PackedScene" uid="uid://660rptxlg7dj" path="res://scenes/levels/level 2.tscn" id="3_lb8x6"]
 [ext_resource type="PackedScene" uid="uid://yf3u5c54fd5d" path="res://scenes/levels/level 1.tscn" id="3_qu3bv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jaqta"]
@@ -11,7 +12,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="Game" type="Control" node_paths=PackedStringArray("menu")]
+[node name="Game" type="Control" node_paths=PackedStringArray("menu", "music_player")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +23,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xulbl")
 menu = NodePath("MenuBG")
-game = ExtResource("3_qu3bv")
+levels = Array[PackedScene]([ExtResource("3_qu3bv"), ExtResource("3_lb8x6")])
+music_player = NodePath("AudioStreamPlayer")
 
 [node name="MenuBG" type="TextureRect" parent="."]
 layout_mode = 1
@@ -72,6 +74,8 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_jaqta")
 text = "Quit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="pressed" from="MenuBG/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MenuBG/VBoxContainer/Options" to="." method="_on_options_pressed"]

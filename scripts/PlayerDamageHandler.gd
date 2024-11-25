@@ -1,5 +1,7 @@
 extends Node
 
+@export var context: PlayerContext
+
 func _player_health_changed(oldHP: int, newHP: int) -> void:
 	if(newHP < oldHP):
 		# TODO: Handle receiving damage
@@ -7,4 +9,4 @@ func _player_health_changed(oldHP: int, newHP: int) -> void:
 
 func _player_died() -> void:
 	# TODO: Handle player death
-	GameStateHandler.instance.stop_current_level()
+	context.level.finish_lost()

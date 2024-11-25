@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=4 uid="uid://yf3u5c54fd5d"]
+[gd_scene load_steps=12 format=4 uid="uid://yf3u5c54fd5d"]
 
-[ext_resource type="PackedScene" uid="uid://df6y1vqi4epwc" path="res://scenes/door.tscn" id="1_oe7kb"]
+[ext_resource type="PackedScene" path="res://scenes/door.tscn" id="1_oe7kb"]
 [ext_resource type="Texture2D" uid="uid://1b2ftem3cd4w" path="res://art/Dungeon Tile Set.png" id="2_jr3kq"]
-[ext_resource type="PackedScene" uid="uid://b2ibgtu4jqmy4" path="res://scenes/key.tscn" id="3_f3yv3"]
+[ext_resource type="PackedScene" path="res://scenes/key.tscn" id="3_f3yv3"]
+[ext_resource type="Script" path="res://scripts/Level.gd" id="4_0yjl3"]
 [ext_resource type="PackedScene" uid="uid://baqsc14a5pdfv" path="res://scenes/player.tscn" id="4_eemic"]
 [ext_resource type="AudioStream" uid="uid://dpjotmh0d5yt5" path="res://sounds/music/idle_music.mp3" id="5_6hcte"]
 [ext_resource type="Script" path="res://scripts/KeyManager.cs" id="6_k22wn"]
@@ -182,7 +183,12 @@ texture = ExtResource("2_jr3kq")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_10ysk")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crbia"]
+size = Vector2(62.7004, 159.341)
+
 [node name="Level 1" type="Node2D"]
+script = ExtResource("4_0yjl3")
+music = ExtResource("5_6hcte")
 
 [node name="Environment" type="Node2D" parent="."]
 
@@ -203,12 +209,16 @@ position = Vector2(763, -231)
 scale = Vector2(3.45605, 3.45605)
 keyManager = NodePath("../../Managers/KeyManager")
 
-[node name="Player_CharacterBody2D" parent="." instance=ExtResource("4_eemic")]
-position = Vector2(57, -525)
+[node name="FinishArea" type="Area2D" parent="Environment"]
+position = Vector2(1128.1, -226.733)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_6hcte")
-autoplay = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/FinishArea"]
+position = Vector2(21.3502, 69.6703)
+shape = SubResource("RectangleShape2D_crbia")
+
+[node name="Player_CharacterBody2D" parent="." node_paths=PackedStringArray("level") instance=ExtResource("4_eemic")]
+position = Vector2(51.9887, -557.223)
+level = NodePath("..")
 
 [node name="Managers" type="Node" parent="."]
 
@@ -223,5 +233,7 @@ position = Vector2(-108, 0)
 
 [node name="Marker2D2" type="Marker2D" parent="Enemy/Waypoints" index="1"]
 position = Vector2(155, 0)
+
+[connection signal="body_entered" from="Environment/FinishArea" to="." method="_on_level_finish_entered"]
 
 [editable path="Enemy"]
