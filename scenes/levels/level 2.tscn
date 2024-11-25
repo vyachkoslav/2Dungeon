@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://660rptxlg7dj"]
+[gd_scene load_steps=16 format=4 uid="uid://660rptxlg7dj"]
 
 [ext_resource type="PackedScene" uid="uid://d1crvgavmwo2l" path="res://scenes/door.tscn" id="1_g6ddo"]
 [ext_resource type="Texture2D" uid="uid://1b2ftem3cd4w" path="res://art/Dungeon Tile Set.png" id="2_1v741"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://baqsc14a5pdfv" path="res://scenes/player.tscn" id="4_ebtjq"]
 [ext_resource type="AudioStream" uid="uid://dpjotmh0d5yt5" path="res://sounds/music/idle_music.mp3" id="5_7701s"]
 [ext_resource type="Script" path="res://scripts/KeyManager.cs" id="6_jmcvf"]
-[ext_resource type="Texture2D" uid="uid://d0y7d23eiiawh" path="res://art/Sprite_heart.png" id="7_vrrrk"]
+[ext_resource type="Script" path="res://scripts/Traps.gd" id="7_4cwek"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10ysk"]
 texture = ExtResource("2_1v741")
@@ -186,9 +186,23 @@ texture = ExtResource("2_1v741")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_10ysk")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4webc"]
-atlas = ExtResource("2_1v741")
-region = Rect2(176, 144, 16, 16)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxl13"]
+size = Vector2(10, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fbdhd"]
+size = Vector2(50, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ktffj"]
+size = Vector2(18, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wyn8n"]
+size = Vector2(34, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_10fwi"]
+size = Vector2(10, 82)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjpyf"]
+size = Vector2(353, 10)
 
 [node name="Game" type="Node2D"]
 
@@ -211,9 +225,8 @@ position = Vector2(306, -117)
 scale = Vector2(3.45605, 3.45605)
 keyManager = NodePath("../../Managers/KeyManager")
 
-[node name="Player_CharacterBody2D" parent="." node_paths=PackedStringArray("hearts") instance=ExtResource("4_ebtjq")]
+[node name="Player_CharacterBody2D" parent="." instance=ExtResource("4_ebtjq")]
 position = Vector2(304.747, -161.248)
-hearts = [NodePath("../HUD/Hearts/HBoxContainer/heart"), NodePath("../HUD/Hearts/HBoxContainer/heart3"), NodePath("../HUD/Hearts/HBoxContainer/heart2")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_7701s")
@@ -224,84 +237,31 @@ autoplay = true
 [node name="KeyManager" type="Node" parent="Managers"]
 script = ExtResource("6_jmcvf")
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("7_4cwek")
 
-[node name="Hearts" type="Panel" parent="HUD"]
-offset_left = 100.0
-offset_top = 50.0
-offset_right = 263.0
-offset_bottom = 90.0
-scale = Vector2(1.5, 1.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(127, -74)
+shape = SubResource("RectangleShape2D_qxl13")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Hearts"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -69.5
-offset_top = -20.0
-offset_right = 69.5
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(786, -15)
+shape = SubResource("RectangleShape2D_fbdhd")
 
-[node name="heart" type="TextureRect" parent="HUD/Hearts/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("7_vrrrk")
-expand_mode = 2
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(674, -15)
+shape = SubResource("RectangleShape2D_ktffj")
 
-[node name="heart3" type="TextureRect" parent="HUD/Hearts/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("7_vrrrk")
-expand_mode = 2
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(602, -15)
+shape = SubResource("RectangleShape2D_wyn8n")
 
-[node name="heart2" type="TextureRect" parent="HUD/Hearts/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-texture = ExtResource("7_vrrrk")
-expand_mode = 2
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(181, -98)
+shape = SubResource("RectangleShape2D_10fwi")
 
-[node name="Pause" type="Panel" parent="HUD"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -140.0
-offset_top = 50.0
-offset_right = -100.0
-offset_bottom = 90.0
-grow_horizontal = 0
-scale = Vector2(1.5, 1.5)
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1529.5, -15)
+shape = SubResource("RectangleShape2D_jjpyf")
 
-[node name="PauseButton" type="Button" parent="HUD/Pause"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-text = "PAUSE"
-
-[node name="Key" type="Panel" parent="HUD"]
-visible = false
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -510.0
-offset_top = 50.0
-offset_right = -421.0
-offset_bottom = 115.0
-grow_horizontal = 2
-
-[node name="key" type="TextureRect" parent="HUD/Key"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -48.5
-offset_top = -42.0
-offset_right = 48.5
-offset_bottom = 42.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("AtlasTexture_4webc")
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
