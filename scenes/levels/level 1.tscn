@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://yf3u5c54fd5d"]
+[gd_scene load_steps=10 format=4 uid="uid://yf3u5c54fd5d"]
 
 [ext_resource type="PackedScene" uid="uid://df6y1vqi4epwc" path="res://scenes/door.tscn" id="1_oe7kb"]
 [ext_resource type="Texture2D" uid="uid://1b2ftem3cd4w" path="res://art/Dungeon Tile Set.png" id="2_jr3kq"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://baqsc14a5pdfv" path="res://scenes/player.tscn" id="4_eemic"]
 [ext_resource type="AudioStream" uid="uid://dpjotmh0d5yt5" path="res://sounds/music/idle_music.mp3" id="5_6hcte"]
 [ext_resource type="Script" path="res://scripts/KeyManager.cs" id="6_k22wn"]
+[ext_resource type="PackedScene" uid="uid://bsoxijuk0gbe0" path="res://scenes/enemy.tscn" id="7_mya8p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10ysk"]
 texture = ExtResource("2_jr3kq")
@@ -213,3 +214,14 @@ autoplay = true
 
 [node name="KeyManager" type="Node" parent="Managers"]
 script = ExtResource("6_k22wn")
+
+[node name="Enemy" parent="." instance=ExtResource("7_mya8p")]
+position = Vector2(698, -17)
+
+[node name="Marker2D" type="Marker2D" parent="Enemy/Waypoints" index="0"]
+position = Vector2(-108, 0)
+
+[node name="Marker2D2" type="Marker2D" parent="Enemy/Waypoints" index="1"]
+position = Vector2(155, 0)
+
+[editable path="Enemy"]

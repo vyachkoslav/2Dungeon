@@ -1,11 +1,12 @@
-[gd_scene load_steps=9 format=4 uid="uid://yui3ank1kemj"]
+[gd_scene load_steps=10 format=4 uid="uid://yui3ank1kemj"]
 
 [ext_resource type="Texture2D" uid="uid://dvpn1gbp5l028" path="res://icon.svg" id="1_f14jq"]
 [ext_resource type="Script" path="res://scripts/KeyManager.cs" id="1_rfa2q"]
 [ext_resource type="PackedScene" uid="uid://baqsc14a5pdfv" path="res://scenes/player.tscn" id="2_ojqwa"]
 [ext_resource type="AudioStream" uid="uid://dpjotmh0d5yt5" path="res://sounds/music/idle_music.mp3" id="3_1teve"]
-[ext_resource type="PackedScene" uid="uid://cpv2so5nfvm3" path="res://scenes/key.tscn" id="4_rhcao"]
-[ext_resource type="PackedScene" uid="uid://d1crvgavmwo2l" path="res://scenes/door.tscn" id="6_4wbn3"]
+[ext_resource type="PackedScene" path="res://scenes/key.tscn" id="4_rhcao"]
+[ext_resource type="PackedScene" path="res://scenes/door.tscn" id="6_4wbn3"]
+[ext_resource type="PackedScene" uid="uid://bsoxijuk0gbe0" path="res://scenes/enemy.tscn" id="7_0wpvd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_egm2y"]
 texture = ExtResource("1_f14jq")
@@ -233,3 +234,16 @@ keyManager = NodePath("../Managers/KeyManager")
 [node name="Door" parent="." node_paths=PackedStringArray("keyManager") instance=ExtResource("6_4wbn3")]
 position = Vector2(110, -26)
 keyManager = NodePath("../Managers/KeyManager")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Enemy" parent="." instance=ExtResource("7_0wpvd")]
+position = Vector2(188, -24)
+
+[node name="Marker2D" type="Marker2D" parent="Enemy/Waypoints" index="0"]
+position = Vector2(-53, 0)
+
+[node name="Marker2D2" type="Marker2D" parent="Enemy/Waypoints" index="1"]
+position = Vector2(60, 0)
+
+[editable path="Enemy"]

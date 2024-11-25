@@ -1,10 +1,14 @@
-[gd_scene load_steps=31 format=3 uid="uid://baqsc14a5pdfv"]
+[gd_scene load_steps=35 format=3 uid="uid://baqsc14a5pdfv"]
 
-[ext_resource type="Script" path="res://scripts/PlayerAnimations.gd" id="1_mf7c5"]
+[ext_resource type="Script" path="res://scripts/AnimationHandler.gd" id="1_mf7c5"]
 [ext_resource type="Texture2D" uid="uid://b222scfefglem" path="res://art/player_animations/jump/player_jump.png" id="1_oh3tj"]
-[ext_resource type="Script" path="res://scripts/PlayerMovement.cs" id="2_ftxwf"]
 [ext_resource type="Texture2D" uid="uid://bulfxol6l1r0r" path="res://art/player_animations/idle/player_idle.png" id="2_uy7vs"]
 [ext_resource type="Texture2D" uid="uid://blryjfb32ev8o" path="res://art/player_animations/run/player_run.png" id="3_37usk"]
+[ext_resource type="Script" path="res://scripts/DamageArea.gd" id="4_0rp5p"]
+[ext_resource type="Script" path="res://scripts/DamageReceiveArea.gd" id="4_ssvb4"]
+[ext_resource type="Script" path="res://scripts/Movement.cs" id="5_wrwg8"]
+[ext_resource type="Script" path="res://scripts/PlayerControlsProvider.cs" id="6_1td04"]
+[ext_resource type="Script" path="res://scripts/PlayerDamageHandler.gd" id="9_7e0hd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1k7ct"]
 atlas = ExtResource("1_oh3tj")
@@ -208,11 +212,27 @@ size = Vector2(24.7487, 30.942)
 
 [node name="Player_CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(0.8, 0.816)
-script = ExtResource("1_mf7c5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_70ote")
 animation = &"fall"
+
+[node name="DamageArea" type="Area2D" parent="."]
+script = ExtResource("4_0rp5p")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(-0.528016, 0.526031)
+shape = SubResource("RectangleShape2D_0kdmn")
+
+[node name="DamageReceiveArea" type="Area2D" parent="." node_paths=PackedStringArray("body", "thisAttacker")]
+script = ExtResource("4_ssvb4")
+body = NodePath("..")
+thisAttacker = NodePath("../DamageArea")
+health = 3
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageReceiveArea"]
+position = Vector2(-0.528016, 0.526031)
+shape = SubResource("RectangleShape2D_0kdmn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.528016, 0.526031)
@@ -227,9 +247,24 @@ position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
-[node name="PlayerMovement" type="Node" parent="." node_paths=PackedStringArray("playerBody")]
-script = ExtResource("2_ftxwf")
-playerBody = NodePath("..")
+[node name="Movement" type="Node" parent="." node_paths=PackedStringArray("body", "controls")]
+script = ExtResource("5_wrwg8")
+body = NodePath("..")
+controls = NodePath("PlayerControlsProvider")
 maxSpeed = 300.0
 acceleration = 1000.0
 jumpStrength = 500.0
+
+[node name="PlayerControlsProvider" type="Node" parent="Movement"]
+script = ExtResource("6_1td04")
+
+[node name="AnimationHandler" type="Node" parent="." node_paths=PackedStringArray("animatedSprite", "body")]
+script = ExtResource("1_mf7c5")
+animatedSprite = NodePath("../AnimatedSprite2D")
+body = NodePath("..")
+
+[node name="PlayerDamageHandler" type="Node" parent="."]
+script = ExtResource("9_7e0hd")
+
+[connection signal="died" from="DamageReceiveArea" to="PlayerDamageHandler" method="_player_died"]
+[connection signal="health_changed" from="DamageReceiveArea" to="PlayerDamageHandler" method="_player_health_changed"]
