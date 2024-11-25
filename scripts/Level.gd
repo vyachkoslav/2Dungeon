@@ -1,5 +1,6 @@
 class_name Level extends Node2D
 
+@export var music: AudioStream
 var game: GameStateHandler
 
 func _on_level_finish_entered(body: Node2D) -> void:

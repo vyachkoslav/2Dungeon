@@ -188,6 +188,7 @@ size = Vector2(62.7004, 159.341)
 
 [node name="Level 1" type="Node2D"]
 script = ExtResource("4_0yjl3")
+music = ExtResource("5_6hcte")
 
 [node name="Environment" type="Node2D" parent="."]
 
@@ -218,10 +219,6 @@ shape = SubResource("RectangleShape2D_crbia")
 [node name="Player_CharacterBody2D" parent="." node_paths=PackedStringArray("level") instance=ExtResource("4_eemic")]
 position = Vector2(51.9887, -557.223)
 level = NodePath("..")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_6hcte")
-autoplay = true
 
 [node name="Managers" type="Node" parent="."]
 

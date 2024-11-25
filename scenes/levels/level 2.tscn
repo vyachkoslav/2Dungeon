@@ -191,6 +191,7 @@ sources/0 = SubResource("TileSetAtlasSource_10ysk")
 
 [node name="Level 2" type="Node2D"]
 script = ExtResource("1_xc50r")
+music = ExtResource("5_7701s")
 
 [node name="Environment" type="Node2D" parent="."]
 
@@ -238,10 +239,6 @@ position = Vector2(139, 0)
 [node name="Player_CharacterBody2D" parent="." node_paths=PackedStringArray("level") instance=ExtResource("4_ebtjq")]
 position = Vector2(100.517, -155.909)
 level = NodePath("..")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_7701s")
-autoplay = true
 
 [node name="Managers" type="Node" parent="."]
 
