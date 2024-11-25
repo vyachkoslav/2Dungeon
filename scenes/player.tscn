@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://baqsc14a5pdfv"]
+[gd_scene load_steps=35 format=3 uid="uid://baqsc14a5pdfv"]
 
 [ext_resource type="Script" path="res://scripts/AnimationHandler.gd" id="1_mf7c5"]
 [ext_resource type="Texture2D" uid="uid://b222scfefglem" path="res://art/player_animations/jump/player_jump.png" id="1_oh3tj"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/DamageReceiveArea.gd" id="4_ssvb4"]
 [ext_resource type="Script" path="res://scripts/Movement.cs" id="5_wrwg8"]
 [ext_resource type="Script" path="res://scripts/PlayerControlsProvider.cs" id="6_1td04"]
+[ext_resource type="Script" path="res://scripts/PlayerDamageHandler.gd" id="9_7e0hd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1k7ct"]
 atlas = ExtResource("1_oh3tj")
@@ -261,3 +262,9 @@ script = ExtResource("6_1td04")
 script = ExtResource("1_mf7c5")
 animatedSprite = NodePath("../AnimatedSprite2D")
 body = NodePath("..")
+
+[node name="PlayerDamageHandler" type="Node" parent="."]
+script = ExtResource("9_7e0hd")
+
+[connection signal="died" from="DamageReceiveArea" to="PlayerDamageHandler" method="_player_died"]
+[connection signal="health_changed" from="DamageReceiveArea" to="PlayerDamageHandler" method="_player_health_changed"]
