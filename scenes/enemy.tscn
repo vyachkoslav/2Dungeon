@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://scripts/AnimationHandler.gd" id="7_pck4d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hoya"]
-size = Vector2(23, 1)
+size = Vector2(21, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0icok"]
 size = Vector2(31, 13.9961)
