@@ -1,0 +1,92 @@
+[gd_scene load_steps=4 format=3 uid="uid://boxobp6wyiiin"]
+
+[ext_resource type="Texture2D" uid="uid://d0y7d23eiiawh" path="res://art/Sprite_heart.png" id="1_w5rmn"]
+[ext_resource type="Texture2D" uid="uid://1b2ftem3cd4w" path="res://art/Dungeon Tile Set.png" id="2_01kuk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7oya"]
+atlas = ExtResource("2_01kuk")
+region = Rect2(176, 144, 16, 16)
+
+[node name="HUD" type="Node2D"]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Hearts" type="Panel" parent="HUD"]
+offset_left = 100.0
+offset_top = 50.0
+offset_right = 263.0
+offset_bottom = 90.0
+scale = Vector2(1.5, 1.5)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Hearts"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.5
+offset_top = -20.0
+offset_right = 69.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="heart" type="TextureRect" parent="HUD/Hearts/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_w5rmn")
+expand_mode = 2
+
+[node name="heart3" type="TextureRect" parent="HUD/Hearts/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_w5rmn")
+expand_mode = 2
+
+[node name="heart2" type="TextureRect" parent="HUD/Hearts/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("1_w5rmn")
+expand_mode = 2
+
+[node name="Pause" type="Panel" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -140.0
+offset_top = 50.0
+offset_right = -100.0
+offset_bottom = 90.0
+grow_horizontal = 0
+scale = Vector2(1.5, 1.5)
+
+[node name="PauseButton" type="Button" parent="HUD/Pause"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "PAUSE"
+
+[node name="Key" type="Panel" parent="HUD"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -510.0
+offset_top = 50.0
+offset_right = -421.0
+offset_bottom = 115.0
+grow_horizontal = 2
+
+[node name="key" type="TextureRect" parent="HUD/Key"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -42.0
+offset_right = 48.5
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_u7oya")

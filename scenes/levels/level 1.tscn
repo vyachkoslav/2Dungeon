@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://yf3u5c54fd5d"]
+[gd_scene load_steps=14 format=4 uid="uid://yf3u5c54fd5d"]
 
 [ext_resource type="PackedScene" path="res://scenes/door.tscn" id="1_oe7kb"]
 [ext_resource type="Texture2D" uid="uid://1b2ftem3cd4w" path="res://art/Dungeon Tile Set.png" id="2_jr3kq"]
@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://baqsc14a5pdfv" path="res://scenes/player.tscn" id="4_eemic"]
 [ext_resource type="AudioStream" uid="uid://dpjotmh0d5yt5" path="res://sounds/music/idle_music.mp3" id="5_6hcte"]
 [ext_resource type="Script" path="res://scripts/KeyManager.cs" id="6_k22wn"]
-[ext_resource type="PackedScene" uid="uid://bsoxijuk0gbe0" path="res://scenes/enemy.tscn" id="7_mya8p"]
+[ext_resource type="PackedScene" path="res://scenes/enemy.tscn" id="7_mya8p"]
+[ext_resource type="Script" path="res://scripts/DamageArea.gd" id="10_rwpek"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10ysk"]
 texture = ExtResource("2_jr3kq")
@@ -186,6 +187,9 @@ sources/0 = SubResource("TileSetAtlasSource_10ysk")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_crbia"]
 size = Vector2(62.7004, 159.341)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhgof"]
+size = Vector2(161, 9)
+
 [node name="Level 1" type="Node2D"]
 script = ExtResource("4_0yjl3")
 music = ExtResource("5_6hcte")
@@ -233,6 +237,13 @@ position = Vector2(-108, 0)
 
 [node name="Marker2D2" type="Marker2D" parent="Enemy/Waypoints" index="1"]
 position = Vector2(155, 0)
+
+[node name="TrapArea" type="Area2D" parent="."]
+script = ExtResource("10_rwpek")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrapArea"]
+position = Vector2(431.5, -14.5)
+shape = SubResource("RectangleShape2D_lhgof")
 
 [connection signal="body_entered" from="Environment/FinishArea" to="." method="_on_level_finish_entered"]
 
