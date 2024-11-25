@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://8oxka15kc5ky"]
+[gd_scene load_steps=6 format=3 uid="uid://8oxka15kc5ky"]
 
 [ext_resource type="Script" path="res://scripts/GameStateHandler.gd" id="1_xulbl"]
 [ext_resource type="Texture2D" uid="uid://cxhijhhbftmvl" path="res://art/dungeon background 7.png" id="2_xw8ov"]
+[ext_resource type="PackedScene" uid="uid://660rptxlg7dj" path="res://scenes/levels/level 2.tscn" id="3_lb8x6"]
 [ext_resource type="PackedScene" uid="uid://yf3u5c54fd5d" path="res://scenes/levels/level 1.tscn" id="3_qu3bv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jaqta"]
@@ -22,7 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xulbl")
 menu = NodePath("MenuBG")
-game = ExtResource("3_qu3bv")
+levels = Array[PackedScene]([ExtResource("3_qu3bv"), ExtResource("3_lb8x6")])
 
 [node name="MenuBG" type="TextureRect" parent="."]
 layout_mode = 1

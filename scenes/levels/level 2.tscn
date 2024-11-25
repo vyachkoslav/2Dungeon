@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://660rptxlg7dj"]
+[gd_scene load_steps=10 format=4 uid="uid://660rptxlg7dj"]
 
-[ext_resource type="PackedScene" uid="uid://d1crvgavmwo2l" path="res://scenes/door.tscn" id="1_g6ddo"]
+[ext_resource type="PackedScene" path="res://scenes/door.tscn" id="1_g6ddo"]
+[ext_resource type="Script" path="res://scripts/Level.gd" id="1_xc50r"]
 [ext_resource type="Texture2D" uid="uid://1b2ftem3cd4w" path="res://art/Dungeon Tile Set.png" id="2_1v741"]
-[ext_resource type="PackedScene" uid="uid://cpv2so5nfvm3" path="res://scenes/key.tscn" id="3_dgbx1"]
+[ext_resource type="PackedScene" path="res://scenes/key.tscn" id="3_dgbx1"]
 [ext_resource type="PackedScene" uid="uid://baqsc14a5pdfv" path="res://scenes/player.tscn" id="4_ebtjq"]
 [ext_resource type="AudioStream" uid="uid://dpjotmh0d5yt5" path="res://sounds/music/idle_music.mp3" id="5_7701s"]
 [ext_resource type="Script" path="res://scripts/KeyManager.cs" id="6_jmcvf"]
@@ -185,7 +186,8 @@ texture = ExtResource("2_1v741")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_10ysk")
 
-[node name="Game" type="Node2D"]
+[node name="Level 2" type="Node2D"]
+script = ExtResource("1_xc50r")
 
 [node name="Environment" type="Node2D" parent="."]
 
@@ -206,8 +208,9 @@ position = Vector2(306, -117)
 scale = Vector2(3.45605, 3.45605)
 keyManager = NodePath("../../Managers/KeyManager")
 
-[node name="Player_CharacterBody2D" parent="." instance=ExtResource("4_ebtjq")]
+[node name="Player_CharacterBody2D" parent="." node_paths=PackedStringArray("level") instance=ExtResource("4_ebtjq")]
 position = Vector2(100.517, -155.909)
+level = NodePath("..")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_7701s")
