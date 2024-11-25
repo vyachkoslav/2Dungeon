@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://baqsc14a5pdfv"]
+[gd_scene load_steps=39 format=3 uid="uid://baqsc14a5pdfv"]
 
 [ext_resource type="Script" path="res://scripts/PlayerContext.gd" id="1_ate2h"]
 [ext_resource type="Script" path="res://scripts/AnimationHandler.gd" id="1_mf7c5"]
@@ -9,10 +9,9 @@
 [ext_resource type="Script" path="res://scripts/DamageReceiveArea.gd" id="4_ssvb4"]
 [ext_resource type="Script" path="res://scripts/Movement.cs" id="5_wrwg8"]
 [ext_resource type="Script" path="res://scripts/PlayerControlsProvider.cs" id="6_1td04"]
-[ext_resource type="Script" path="res://scripts/PlayerDamageHandler.gd" id="9_7e0hd"]
 [ext_resource type="Texture2D" uid="uid://d0y7d23eiiawh" path="res://art/Sprite_heart.png" id="6_6qyw1"]
 [ext_resource type="Texture2D" uid="uid://1b2ftem3cd4w" path="res://art/Dungeon Tile Set.png" id="7_aalfo"]
-[ext_resource type="Script" path="res://scripts/PlayerHealth.gd" id="8_gqyya"]
+[ext_resource type="Script" path="res://scripts/PlayerDamageHandler.gd" id="9_7e0hd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1k7ct"]
 atlas = ExtResource("1_oh3tj")
@@ -218,7 +217,7 @@ size = Vector2(24.7487, 30.942)
 atlas = ExtResource("7_aalfo")
 region = Rect2(176, 144, 16, 16)
 
-[node name="Player_CharacterBody2D" type="CharacterBody2D"]
+[node name="Player_CharacterBody2D" type="CharacterBody2D" groups=["Player"]]
 scale = Vector2(0.8, 0.816)
 script = ExtResource("1_ate2h")
 
@@ -272,15 +271,9 @@ script = ExtResource("1_mf7c5")
 animatedSprite = NodePath("../AnimatedSprite2D")
 body = NodePath("..")
 
-[node name="PlayerDamageHandler" type="Node" parent="." node_paths=PackedStringArray("context")]
+[node name="PlayerDamageHandler" type="Node" parent="." node_paths=PackedStringArray("context", "hearts")]
 script = ExtResource("9_7e0hd")
 context = NodePath("..")
-
-[connection signal="died" from="DamageReceiveArea" to="PlayerDamageHandler" method="_player_died"]
-[connection signal="health_changed" from="DamageReceiveArea" to="PlayerDamageHandler" method="_player_health_changed"]
-
-[node name="PlayerHealth" type="Node" parent="." node_paths=PackedStringArray("hearts")]
-script = ExtResource("8_gqyya")
 hearts = [NodePath("../HUD2/Hearts/HBoxContainer/heart"), NodePath("../HUD2/Hearts/HBoxContainer/heart3"), NodePath("../HUD2/Hearts/HBoxContainer/heart2")]
 
 [node name="HUD2" type="CanvasLayer" parent="."]
@@ -294,17 +287,12 @@ scale = Vector2(1.5, 1.5)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD2/Hearts"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -69.5
-offset_top = -20.0
-offset_right = 69.5
-offset_bottom = 20.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
 [node name="heart" type="TextureRect" parent="HUD2/Hearts/HBoxContainer"]
 layout_mode = 2
@@ -364,3 +352,6 @@ offset_bottom = 42.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_bd5mh")
+
+[connection signal="died" from="DamageReceiveArea" to="PlayerDamageHandler" method="_player_died"]
+[connection signal="health_changed" from="DamageReceiveArea" to="PlayerDamageHandler" method="_player_health_changed"]

@@ -1,15 +1,14 @@
-[gd_scene load_steps=11 format=4 uid="uid://yf3u5c54fd5d"]
+[gd_scene load_steps=14 format=4 uid="uid://yf3u5c54fd5d"]
 
-[ext_resource type="PackedScene" uid="uid://d1crvgavmwo2l" path="res://scenes/door.tscn" id="1_oe7kb"]
+[ext_resource type="PackedScene" path="res://scenes/door.tscn" id="1_oe7kb"]
 [ext_resource type="Texture2D" uid="uid://1b2ftem3cd4w" path="res://art/Dungeon Tile Set.png" id="2_jr3kq"]
 [ext_resource type="PackedScene" path="res://scenes/key.tscn" id="3_f3yv3"]
 [ext_resource type="Script" path="res://scripts/Level.gd" id="4_0yjl3"]
 [ext_resource type="PackedScene" uid="uid://baqsc14a5pdfv" path="res://scenes/player.tscn" id="4_eemic"]
 [ext_resource type="AudioStream" uid="uid://dpjotmh0d5yt5" path="res://sounds/music/idle_music.mp3" id="5_6hcte"]
 [ext_resource type="Script" path="res://scripts/KeyManager.cs" id="6_k22wn"]
-[ext_resource type="PackedScene" uid="uid://bsoxijuk0gbe0" path="res://scenes/enemy.tscn" id="7_mya8p"]
-[ext_resource type="Texture2D" uid="uid://d0y7d23eiiawh" path="res://art/Sprite_heart.png" id="7_7hqmj"]
-[ext_resource type="Script" path="res://scripts/Traps.gd" id="7_107cc"]
+[ext_resource type="PackedScene" path="res://scenes/enemy.tscn" id="7_mya8p"]
+[ext_resource type="Script" path="res://scripts/DamageArea.gd" id="10_rwpek"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10ysk"]
 texture = ExtResource("2_jr3kq")
@@ -185,11 +184,11 @@ texture = ExtResource("2_jr3kq")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_10ysk")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhgof"]
-size = Vector2(161, 9)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_crbia"]
 size = Vector2(62.7004, 159.341)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhgof"]
+size = Vector2(161, 9)
 
 [node name="Level 1" type="Node2D"]
 script = ExtResource("4_0yjl3")
@@ -239,42 +238,13 @@ position = Vector2(-108, 0)
 [node name="Marker2D2" type="Marker2D" parent="Enemy/Waypoints" index="1"]
 position = Vector2(155, 0)
 
-[connection signal="body_entered" from="Environment/FinishArea" to="." method="_on_level_finish_entered"]
+[node name="TrapArea" type="Area2D" parent="."]
+script = ExtResource("10_rwpek")
 
-[editable path="Enemy"]
-
-[node name="HUD" type="CanvasLayer" parent="."]
-
-[node name="Hearts" type="Panel" parent="HUD"]
-offset_left = 100.0
-offset_top = 50.0
-offset_right = 263.0
-offset_bottom = 90.0
-scale = Vector2(1.5, 1.5)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Hearts"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -69.5
-offset_top = -20.0
-offset_right = 69.5
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="heart" type="TextureRect" parent="HUD/Hearts/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("7_7hqmj")
-expand_mode = 2
-[node name="Area2D" type="Area2D" parent="."]
-script = ExtResource("7_107cc")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrapArea"]
 position = Vector2(431.5, -14.5)
 shape = SubResource("RectangleShape2D_lhgof")
 
-[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_entered" from="Environment/FinishArea" to="." method="_on_level_finish_entered"]
+
+[editable path="Enemy"]

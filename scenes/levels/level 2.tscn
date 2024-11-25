@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://660rptxlg7dj"]
+[gd_scene load_steps=19 format=4 uid="uid://660rptxlg7dj"]
 
 [ext_resource type="PackedScene" path="res://scenes/door.tscn" id="1_g6ddo"]
 [ext_resource type="Script" path="res://scripts/Level.gd" id="1_xc50r"]
@@ -7,9 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://baqsc14a5pdfv" path="res://scenes/player.tscn" id="4_ebtjq"]
 [ext_resource type="AudioStream" uid="uid://dpjotmh0d5yt5" path="res://sounds/music/idle_music.mp3" id="5_7701s"]
 [ext_resource type="Script" path="res://scripts/KeyManager.cs" id="6_jmcvf"]
-[ext_resource type="PackedScene" uid="uid://bsoxijuk0gbe0" path="res://scenes/enemy.tscn" id="7_48om7"]
-[ext_resource type="Texture2D" uid="uid://d0y7d23eiiawh" path="res://art/Sprite_heart.png" id="7_vrrrk"]
-[ext_resource type="Script" path="res://scripts/Traps.gd" id="7_4cwek"]
+[ext_resource type="PackedScene" path="res://scenes/enemy.tscn" id="7_48om7"]
+[ext_resource type="Script" path="res://scripts/DamageArea.gd" id="9_8diiv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10ysk"]
 texture = ExtResource("2_1v741")
@@ -189,6 +188,8 @@ texture = ExtResource("2_1v741")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_10ysk")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mov0q"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxl13"]
 size = Vector2(10, 128)
 
@@ -206,8 +207,6 @@ size = Vector2(10, 82)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jjpyf"]
 size = Vector2(353, 10)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mov0q"]
 
 [node name="Level 2" type="Node2D"]
 script = ExtResource("1_xc50r")
@@ -265,44 +264,34 @@ level = NodePath("..")
 [node name="KeyManager" type="Node" parent="Managers"]
 script = ExtResource("6_jmcvf")
 
+[node name="TrapArea" type="Area2D" parent="."]
+script = ExtResource("9_8diiv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrapArea"]
+position = Vector2(127, -74)
+shape = SubResource("RectangleShape2D_qxl13")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TrapArea"]
+position = Vector2(786, -15)
+shape = SubResource("RectangleShape2D_fbdhd")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="TrapArea"]
+position = Vector2(674, -15)
+shape = SubResource("RectangleShape2D_ktffj")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="TrapArea"]
+position = Vector2(602, -15)
+shape = SubResource("RectangleShape2D_wyn8n")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="TrapArea"]
+position = Vector2(181, -98)
+shape = SubResource("RectangleShape2D_10fwi")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="TrapArea"]
+position = Vector2(1529.5, -15)
+shape = SubResource("RectangleShape2D_jjpyf")
+
 [connection signal="body_entered" from="Environment/FinishArea" to="." method="_on_level_finish_entered"]
 
 [editable path="Environment/Enemy"]
 [editable path="Environment/Enemy/Enemy"]
-
-[node name="HUD" type="CanvasLayer" parent="."]
-
-[node name="Hearts" type="Panel" parent="HUD"]
-offset_left = 100.0
-offset_top = 50.0
-offset_right = 263.0
-offset_bottom = 90.0
-scale = Vector2(1.5, 1.5)
-[node name="Area2D" type="Area2D" parent="."]
-script = ExtResource("7_4cwek")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(127, -74)
-shape = SubResource("RectangleShape2D_qxl13")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(786, -15)
-shape = SubResource("RectangleShape2D_fbdhd")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(674, -15)
-shape = SubResource("RectangleShape2D_ktffj")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(602, -15)
-shape = SubResource("RectangleShape2D_wyn8n")
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(181, -98)
-shape = SubResource("RectangleShape2D_10fwi")
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1529.5, -15)
-shape = SubResource("RectangleShape2D_jjpyf")
-
-[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
