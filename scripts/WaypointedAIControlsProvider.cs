@@ -1,5 +1,5 @@
 using Godot;
-using System;
+using System.Linq;
 
 public partial class WaypointedAIControlsProvider : ControlsProvider
 {
@@ -7,16 +7,18 @@ public partial class WaypointedAIControlsProvider : ControlsProvider
     public override bool WantsToJump => false;
 
 	[Export] private Node2D body;
-	[Export] private Godot.Collections.Array<Node2D> waypoints;
+	[Export] private Node waypointsParent;
 	[Export] private bool alignWithX;
 	[Export] private bool alignWithY;
 
-	private int currentWaypoint = 0;
+	private Node2D[] waypoints;
+	private int currentWaypoint;
 	private Vector2 direction;
 	private Node2D currentWaypointNode => waypoints[currentWaypoint];
 
     public override void _Ready()
     {
+	    waypoints = waypointsParent.GetChildren().Select((x) => x as Node2D).ToArray();
         CalculateDirection();
     }
 
@@ -27,7 +29,7 @@ public partial class WaypointedAIControlsProvider : ControlsProvider
 		
 		if(xAligned == alignWithX && yAligned == alignWithY)
 		{
-			currentWaypoint = (currentWaypoint + 1) % waypoints.Count;
+			currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
 			CalculateDirection();
 		}
 	}

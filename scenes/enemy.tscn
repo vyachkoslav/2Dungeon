@@ -1,73 +1,97 @@
-[gd_scene load_steps=23 format=3 uid="uid://y8ljt33hcm81"]
+[gd_scene load_steps=27 format=3 uid="uid://bsoxijuk0gbe0"]
 
-[ext_resource type="Script" path="res://scripts/AnimatedBody.gd" id="1_jxlk3"]
-[ext_resource type="Texture2D" uid="uid://cajojyvovs4mw" path="res://art/Ramses Free Package/Idle/Spr_Idle.png" id="2_whmyj"]
-[ext_resource type="Texture2D" uid="uid://1voetmb6gigf" path="res://art/Ramses Free Package/Walk/Spr_Walk.png" id="3_lqch3"]
-[ext_resource type="Script" path="res://scripts/Movement.cs" id="4_nvqto"]
-[ext_resource type="Script" path="res://scripts/WaypointedAIControlsProvider.cs" id="5_4nwb8"]
+[ext_resource type="Script" path="res://scripts/DamageReceiveArea.gd" id="1_o4pw7"]
+[ext_resource type="Script" path="res://scripts/DamageArea.gd" id="2_xt1mc"]
+[ext_resource type="Texture2D" uid="uid://cajojyvovs4mw" path="res://art/Ramses Free Package/Idle/Spr_Idle.png" id="3_u7ja6"]
+[ext_resource type="Texture2D" uid="uid://1voetmb6gigf" path="res://art/Ramses Free Package/Walk/Spr_Walk.png" id="4_ihlw8"]
+[ext_resource type="Script" path="res://scripts/Movement.cs" id="5_hk4mn"]
+[ext_resource type="Script" path="res://scripts/WaypointedAIControlsProvider.cs" id="6_s7n8n"]
+[ext_resource type="Script" path="res://scripts/AnimationHandler.gd" id="7_pck4d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3hoya"]
+size = Vector2(23, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0icok"]
+size = Vector2(31, 13.9961)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2itq2"]
-atlas = ExtResource("2_whmyj")
+atlas = ExtResource("3_u7ja6")
 region = Rect2(0, 0, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o61tc"]
-atlas = ExtResource("2_whmyj")
+atlas = ExtResource("3_u7ja6")
 region = Rect2(40, 0, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xew6k"]
-atlas = ExtResource("2_whmyj")
+atlas = ExtResource("3_u7ja6")
 region = Rect2(80, 0, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atmtr"]
-atlas = ExtResource("2_whmyj")
+atlas = ExtResource("3_u7ja6")
 region = Rect2(120, 0, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ifbs1"]
-atlas = ExtResource("2_whmyj")
+atlas = ExtResource("3_u7ja6")
 region = Rect2(160, 0, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kgpeq"]
-atlas = ExtResource("2_whmyj")
+atlas = ExtResource("3_u7ja6")
 region = Rect2(200, 0, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a2ov6"]
-atlas = ExtResource("2_whmyj")
+atlas = ExtResource("3_u7ja6")
 region = Rect2(240, 0, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1lor3"]
-atlas = ExtResource("3_lqch3")
+atlas = ExtResource("4_ihlw8")
 region = Rect2(0, 0, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5nvhg"]
-atlas = ExtResource("3_lqch3")
+atlas = ExtResource("4_ihlw8")
 region = Rect2(40, 0, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ybees"]
-atlas = ExtResource("3_lqch3")
+atlas = ExtResource("4_ihlw8")
 region = Rect2(80, 0, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4gyxv"]
-atlas = ExtResource("3_lqch3")
+atlas = ExtResource("4_ihlw8")
 region = Rect2(120, 0, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pe3pv"]
-atlas = ExtResource("3_lqch3")
+atlas = ExtResource("4_ihlw8")
 region = Rect2(160, 0, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c14jy"]
-atlas = ExtResource("3_lqch3")
+atlas = ExtResource("4_ihlw8")
 region = Rect2(200, 0, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qfx3v"]
-atlas = ExtResource("3_lqch3")
+atlas = ExtResource("4_ihlw8")
 region = Rect2(240, 0, 40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j05i4"]
-atlas = ExtResource("3_lqch3")
+atlas = ExtResource("4_ihlw8")
 region = Rect2(280, 0, 40, 40)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_djycg"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2itq2")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2itq2")
+}],
+"loop": true,
+"name": &"fall_loop",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2itq2")
@@ -125,29 +149,55 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sd6aj"]
-size = Vector2(25.0217, 15.0765)
+size = Vector2(25.0217, 15.0116)
 
-[node name="Enemy_RigidBody2D" type="CharacterBody2D"]
-script = ExtResource("1_jxlk3")
+[node name="Enemy" type="Node2D"]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Enemy_CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="DamageReceiveArea" type="Area2D" parent="Enemy_CharacterBody2D" node_paths=PackedStringArray("body", "thisAttacker")]
+position = Vector2(0.5, -7.53125)
+script = ExtResource("1_o4pw7")
+body = NodePath("..")
+thisAttacker = NodePath("../DamageArea")
+health = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy_CharacterBody2D/DamageReceiveArea"]
+shape = SubResource("RectangleShape2D_3hoya")
+
+[node name="DamageArea" type="Area2D" parent="Enemy_CharacterBody2D"]
+position = Vector2(13.5425, 0.496063)
+script = ExtResource("2_xt1mc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy_CharacterBody2D/DamageArea"]
+position = Vector2(-13.0425, 0.501968)
+shape = SubResource("RectangleShape2D_0icok")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy_CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_djycg")
-animation = &"idle"
+animation = &"fall_loop"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.518036, 0.473331)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy_CharacterBody2D"]
+position = Vector2(0.518036, 0.50579)
 shape = SubResource("RectangleShape2D_sd6aj")
 
-[node name="Movement" type="Node" parent="." node_paths=PackedStringArray("body", "controls")]
-script = ExtResource("4_nvqto")
+[node name="Movement" type="Node" parent="Enemy_CharacterBody2D" node_paths=PackedStringArray("body", "controls")]
+script = ExtResource("5_hk4mn")
 body = NodePath("..")
 controls = NodePath("AIControlProvider")
 maxSpeed = 50.0
 acceleration = 100.0
 jumpStrength = 50.0
 
-[node name="AIControlProvider" type="Node" parent="Movement" node_paths=PackedStringArray("body", "waypoints")]
-script = ExtResource("5_4nwb8")
+[node name="AIControlProvider" type="Node" parent="Enemy_CharacterBody2D/Movement" node_paths=PackedStringArray("body", "waypointsParent")]
+script = ExtResource("6_s7n8n")
 body = NodePath("../..")
-waypoints = []
+waypointsParent = NodePath("../../../Waypoints")
 alignWithX = true
+
+[node name="AnimationHandler" type="Node" parent="Enemy_CharacterBody2D" node_paths=PackedStringArray("animatedSprite", "body")]
+script = ExtResource("7_pck4d")
+animatedSprite = NodePath("../AnimatedSprite2D")
+body = NodePath("..")
+
+[node name="Waypoints" type="Node2D" parent="."]

@@ -4,9 +4,9 @@
 [ext_resource type="Script" path="res://scripts/KeyManager.cs" id="1_rfa2q"]
 [ext_resource type="PackedScene" uid="uid://baqsc14a5pdfv" path="res://scenes/player.tscn" id="2_ojqwa"]
 [ext_resource type="AudioStream" uid="uid://dpjotmh0d5yt5" path="res://sounds/music/idle_music.mp3" id="3_1teve"]
-[ext_resource type="PackedScene" uid="uid://cpv2so5nfvm3" path="res://scenes/key.tscn" id="4_rhcao"]
-[ext_resource type="PackedScene" uid="uid://d1crvgavmwo2l" path="res://scenes/door.tscn" id="6_4wbn3"]
-[ext_resource type="PackedScene" uid="uid://y8ljt33hcm81" path="res://scenes/enemy.tscn" id="7_0wpvd"]
+[ext_resource type="PackedScene" path="res://scenes/key.tscn" id="4_rhcao"]
+[ext_resource type="PackedScene" path="res://scenes/door.tscn" id="6_4wbn3"]
+[ext_resource type="PackedScene" uid="uid://bsoxijuk0gbe0" path="res://scenes/enemy.tscn" id="7_0wpvd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_egm2y"]
 texture = ExtResource("1_f14jq")
@@ -237,20 +237,13 @@ keyManager = NodePath("../Managers/KeyManager")
 
 [node name="Node" type="Node" parent="."]
 
-[node name="Enemy" type="Node2D" parent="."]
+[node name="Enemy" parent="." instance=ExtResource("7_0wpvd")]
+position = Vector2(188, -24)
 
-[node name="Enemy_RigidBody2D" parent="Enemy" instance=ExtResource("7_0wpvd")]
-position = Vector2(169.249, -29.665)
+[node name="Marker2D" type="Marker2D" parent="Enemy/Waypoints" index="0"]
+position = Vector2(-53, 0)
 
-[node name="AIControlProvider" parent="Enemy/Enemy_RigidBody2D/Movement" index="0" node_paths=PackedStringArray("waypoints")]
-waypoints = [NodePath("../../../Waypoints/Marker2D"), NodePath("../../../Waypoints/Marker2D2")]
+[node name="Marker2D2" type="Marker2D" parent="Enemy/Waypoints" index="1"]
+position = Vector2(60, 0)
 
-[node name="Waypoints" type="Node2D" parent="Enemy"]
-
-[node name="Marker2D" type="Marker2D" parent="Enemy/Waypoints"]
-position = Vector2(128.398, -24.3773)
-
-[node name="Marker2D2" type="Marker2D" parent="Enemy/Waypoints"]
-position = Vector2(210.621, -25.1477)
-
-[editable path="Enemy/Enemy_RigidBody2D"]
+[editable path="Enemy"]
