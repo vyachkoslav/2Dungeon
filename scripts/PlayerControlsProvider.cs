@@ -16,6 +16,18 @@ public partial class PlayerControlsProvider : ControlsProvider
 		}
 	}
 
+	public override void _Ready()
+	{
+		if (Input.IsActionPressed(ForwardAction))
+        {
+        	controls.X = 1;
+        }
+        else if (Input.IsActionPressed(BackAction))
+        {
+        	controls.X = -1;
+        }
+	}
+
 	public override void _UnhandledInput(InputEvent @event)
 	{
 		if (@event.IsActionPressed(ForwardAction))
