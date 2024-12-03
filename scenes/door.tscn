@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1crvgavmwo2l"]
+[gd_scene load_steps=8 format=3 uid="uid://d1crvgavmwo2l"]
 
 [ext_resource type="Script" path="res://scripts/Door.cs" id="1_12hgs"]
 [ext_resource type="Texture2D" uid="uid://1b2ftem3cd4w" path="res://art/Dungeon Tile Set.png" id="2_5goux"]
+[ext_resource type="AudioStream" uid="uid://dljvoa7pyaxcy" path="res://sounds/sfx/door_open.wav" id="3_l318g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_th11n"]
 size = Vector2(7.23685, 10)
@@ -44,3 +45,6 @@ shape = SubResource("RectangleShape2D_3wpmv")
 [node name="ClosedSprite" type="Sprite2D" parent="StaticBody2D"]
 scale = Vector2(0.315, 0.315)
 texture = SubResource("AtlasTexture_uhbek")
+
+[node name="sfxDoorOpen" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_l318g")

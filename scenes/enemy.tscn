@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bsoxijuk0gbe0"]
+[gd_scene load_steps=28 format=3 uid="uid://bsoxijuk0gbe0"]
 
 [ext_resource type="Script" path="res://scripts/DamageReceiveArea.gd" id="1_o4pw7"]
 [ext_resource type="Script" path="res://scripts/DamageArea.gd" id="2_xt1mc"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/Movement.cs" id="5_hk4mn"]
 [ext_resource type="Script" path="res://scripts/WaypointedAIControlsProvider.cs" id="6_s7n8n"]
 [ext_resource type="Script" path="res://scripts/AnimationHandler.gd" id="7_pck4d"]
+[ext_resource type="AudioStream" uid="uid://bxbe5fjkw6p4f" path="res://sounds/sfx/enemy_death.wav" id="8_37q5w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hoya"]
 size = Vector2(21, 1)
@@ -201,3 +202,6 @@ animatedSprite = NodePath("../AnimatedSprite2D")
 body = NodePath("..")
 
 [node name="Waypoints" type="Node2D" parent="."]
+
+[node name="sfxEnemyDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_37q5w")

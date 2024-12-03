@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpv2so5nfvm3"]
+[gd_scene load_steps=6 format=3 uid="uid://cpv2so5nfvm3"]
 
 [ext_resource type="Script" path="res://scripts/Key.cs" id="1_ladyr"]
 [ext_resource type="Texture2D" uid="uid://1b2ftem3cd4w" path="res://art/Dungeon Tile Set.png" id="2_uha0r"]
+[ext_resource type="AudioStream" uid="uid://bc58gc6srrmgn" path="res://sounds/sfx/key_pick_up.wav" id="3_t14ix"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_th11n"]
 size = Vector2(4.07353, 2.80503)
@@ -20,3 +21,7 @@ shape = SubResource("RectangleShape2D_th11n")
 [node name="KeySprite" type="Sprite2D" parent="."]
 scale = Vector2(0.315, 0.315)
 texture = SubResource("AtlasTexture_uwwgv")
+
+[node name="sfxKeyPickUp" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_t14ix")
+volume_db = 2.0
