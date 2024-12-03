@@ -46,6 +46,7 @@ func finish_current_level() -> void:
 	_level_node.call_deferred("queue_free")
 	_current_level += 1
 	if _current_level >= levels.size():
-		stop_current_level()
+		get_tree().change_scene_to_file("res://scenes/game_won.tscn")
+		#stop_current_level()
 	else:
 		_start_level(_current_level)

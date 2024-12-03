@@ -41,11 +41,11 @@ text = "Game Over"
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Retry" type="Button" parent="Control/VBoxContainer/VBoxContainer"]
+[node name="Main Menu" type="Button" parent="Control/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 30
-text = "Retry"
+text = "Main Menu"
 
 [node name="Quit" type="Button" parent="Control/VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -53,5 +53,5 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 30
 text = "Quit"
 
-[connection signal="pressed" from="Control/VBoxContainer/VBoxContainer/Retry" to="Control" method="_on_retry_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/VBoxContainer/Main Menu" to="Control" method="_on_retry_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/VBoxContainer/Quit" to="Control" method="_on_quit_pressed"]
