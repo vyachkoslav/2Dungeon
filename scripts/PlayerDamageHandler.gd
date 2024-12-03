@@ -13,5 +13,5 @@ func _player_health_changed(oldHP: int, newHP: int) -> void:
 		pass
 
 func _player_died() -> void:
-	# TODO: Handle player death
-	context.level.finish_lost()
+	# TODO: If we want here is where we could but player death animation
+	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
