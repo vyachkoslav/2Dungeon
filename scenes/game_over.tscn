@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj2hwvskxf4l8"]
+
+[ext_resource type="Script" path="res://scripts/GameNode.gd" id="1_unh1h"]
+
+[node name="GameOver" type="Node2D"]
+script = ExtResource("1_unh1h")
+
+[node name="Canvas" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="Canvas"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Canvas/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -77.0
+offset_right = 175.0
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="Canvas/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 40
+text = "Game Over"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Canvas/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Main Menu" type="Button" parent="Canvas/Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"
+
+[node name="Quit" type="Button" parent="Canvas/Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Quit"
+
+[connection signal="pressed" from="Canvas/Control/VBoxContainer/VBoxContainer/Main Menu" to="." method="return_to_menu"]
+[connection signal="pressed" from="Canvas/Control/VBoxContainer/VBoxContainer/Quit" to="." method="quit_game"]
