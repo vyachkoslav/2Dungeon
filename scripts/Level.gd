@@ -1,7 +1,4 @@
-class_name Level extends Node2D
-
-@export var music: AudioStream
-var game: GameStateHandler
+class_name Level extends GameNode
 
 func _on_level_finish_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
@@ -11,4 +8,4 @@ func finish_won() -> void:
 	game.finish_current_level()
 	
 func finish_lost() -> void:
-	game.stop_current_level()
+	game.show_lost_screen()
