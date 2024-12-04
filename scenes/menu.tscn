@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://8oxka15kc5ky"]
+[gd_scene load_steps=9 format=3 uid="uid://8oxka15kc5ky"]
 
 [ext_resource type="Script" path="res://scripts/GameStateHandler.gd" id="1_xulbl"]
 [ext_resource type="Texture2D" uid="uid://cxhijhhbftmvl" path="res://art/dungeon background 7.png" id="2_xw8ov"]
@@ -13,6 +13,10 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b8xs6"]
+texture_margin_left = 40.0
+texture_margin_right = 40.0
 
 [node name="Game" type="Control" node_paths=PackedStringArray("menu", "music_player")]
 layout_mode = 3
@@ -81,6 +85,48 @@ text = "Quit"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -8.134
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 555.0
+offset_top = 407.0
+offset_right = -615.0
+offset_bottom = -467.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Close"
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_b8xs6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Volume"
+
+[node name="HSlider" type="HSlider" parent="PanelContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+value = 100.0
+
+[node name="Label2" type="Label" parent="PanelContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Mute"
+
+[node name="CheckBox" type="CheckBox" parent="PanelContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
 
 [connection signal="pressed" from="MenuBG/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MenuBG/VBoxContainer/Options" to="." method="_on_options_pressed"]
