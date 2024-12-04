@@ -26,6 +26,7 @@ func _start_level(index: int) -> void:
 	
 func _on_start_pressed() -> void:
 	$OptionsContainer.visible = false
+	$CreditsContainer.visible = false
 	_current_level = 0
 	menu.visible = false
 	_start_level(_current_level)
