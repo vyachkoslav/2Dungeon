@@ -120,6 +120,18 @@ min_value = -60.0
 max_value = 0.0
 script = ExtResource("7_orvoe")
 
+[node name="CreditsContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 552.0
+offset_top = 408.0
+offset_right = -613.0
+offset_bottom = -408.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [connection signal="pressed" from="MenuBG/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MenuBG/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MenuBG/VBoxContainer/Credits" to="." method="_on_credits_pressed"]

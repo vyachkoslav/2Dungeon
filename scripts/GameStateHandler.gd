@@ -39,10 +39,12 @@ func _on_quit_pressed() -> void:
 
 func _on_options_pressed() -> void:
 	$OptionsContainer.visible = !$OptionsContainer.visible
+	$CreditsContainer.visible = false
 	
 
 func _on_credits_pressed() -> void:
-	pass # Replace with function body.
+	$CreditsContainer.visible = !$CreditsContainer.visible
+	$OptionsContainer.visible = false
 	
 func _stop_current_node() -> void:
 	if(_current_node == null): return
