@@ -9,6 +9,8 @@ public partial class Door : Area2D
 	[Export] private Node2D openedDoor;
 	[Export] private Node2D closedDoor;
 	
+	[Export] private AudioStreamPlayer2D openedDoorSound;
+	
 	public override void _Ready()
 	{
 		BodyEntered += OnEntered;
@@ -30,5 +32,6 @@ public partial class Door : Area2D
 		openedDoor.Visible = true;
 		closedDoor.Visible = false;
 		doorPhysicsBody.AddCollisionExceptionWith(playerNode);
+		openedDoorSound?.Play();
 	}
 }

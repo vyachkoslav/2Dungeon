@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://baqsc14a5pdfv"]
+[gd_scene load_steps=42 format=3 uid="uid://baqsc14a5pdfv"]
 
 [ext_resource type="Script" path="res://scripts/PlayerContext.gd" id="1_ate2h"]
 [ext_resource type="Script" path="res://scripts/AnimationHandler.gd" id="1_mf7c5"]
@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://d0y7d23eiiawh" path="res://art/Sprite_heart.png" id="6_6qyw1"]
 [ext_resource type="Texture2D" uid="uid://1b2ftem3cd4w" path="res://art/Dungeon Tile Set.png" id="7_aalfo"]
 [ext_resource type="Script" path="res://scripts/PlayerDamageHandler.gd" id="9_7e0hd"]
+[ext_resource type="AudioStream" uid="uid://dkl8pgn65lrsj" path="res://sounds/sfx/player_jump.wav" id="13_vjdf7"]
+[ext_resource type="AudioStream" uid="uid://ui2mxvie01qo" path="res://sounds/sfx/player_lading.wav" id="14_vuakk"]
+[ext_resource type="AudioStream" uid="uid://cpe8c07xeh0tr" path="res://sounds/sfx/player_damage.wav" id="15_csih3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1k7ct"]
 atlas = ExtResource("1_oh3tj")
@@ -255,13 +258,15 @@ position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
-[node name="Movement" type="Node" parent="." node_paths=PackedStringArray("body", "controls")]
+[node name="Movement" type="Node" parent="." node_paths=PackedStringArray("body", "controls", "jumpSound", "landSound")]
 script = ExtResource("5_wrwg8")
 body = NodePath("..")
 controls = NodePath("PlayerControlsProvider")
 maxSpeed = 300.0
 acceleration = 1000.0
 jumpStrength = 500.0
+jumpSound = NodePath("../sfxPlayerJump")
+landSound = NodePath("../sfxPlayerLanding")
 
 [node name="PlayerControlsProvider" type="Node" parent="Movement"]
 script = ExtResource("6_1td04")
@@ -357,6 +362,15 @@ offset_bottom = 42.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_bd5mh")
+
+[node name="sfxPlayerJump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_vjdf7")
+
+[node name="sfxPlayerLanding" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_vuakk")
+
+[node name="sfxPlayerDamage" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_csih3")
 
 [connection signal="died" from="DamageReceiveArea" to="PlayerDamageHandler" method="_player_died"]
 [connection signal="health_changed" from="DamageReceiveArea" to="PlayerDamageHandler" method="_player_health_changed"]

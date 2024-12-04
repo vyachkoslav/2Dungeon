@@ -5,6 +5,8 @@ public partial class Key : Area2D
 {
 	[Export] private KeyManager keyManager;
 	[Export] private int opensDoorID;
+
+	[Export] private AudioStreamPlayer2D keyPickupSound;
 	
 	public override void _Ready()
 	{
@@ -15,6 +17,7 @@ public partial class Key : Area2D
 	{
 		if (node is not CharacterBody2D) return;
 		keyManager.AddKey(opensDoorID);
+		keyPickupSound?.Play();
 		Visible = false;
 		BodyEntered -= OnEntered;
 	}
