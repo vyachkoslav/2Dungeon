@@ -25,6 +25,7 @@ func _start_level(index: int) -> void:
 	_start_node(levels[index])
 	
 func _on_start_pressed() -> void:
+	$OptionsContainer.visible = false
 	_current_level = 0
 	menu.visible = false
 	_start_level(_current_level)
