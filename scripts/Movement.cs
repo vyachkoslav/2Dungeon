@@ -10,7 +10,11 @@ public partial class Movement : Node
 	[Export] private float jumpStrength;
 	[Export] private bool turnOffDirectionSwitchInertia;
 
+	[Export] private AudioStreamPlayer2D jumpSound;
+	[Export] private AudioStreamPlayer2D landSound;
+
 	private float xControl => controls.Controls.X;
+	private bool wasOnFloor = true;
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -27,7 +31,12 @@ public partial class Movement : Node
 		if(body.IsOnFloor() && controls.WantsToJump)
 		{
 			velocity.Y = -jumpStrength;
+			jumpSound?.Play();
 		}
+
+		if (body.IsOnFloor() && !wasOnFloor)
+			landSound?.Play();
+		wasOnFloor = body.IsOnFloor();
 
 		velocity += body.GetGravity() * (float)delta;
 		body.Velocity = velocity;

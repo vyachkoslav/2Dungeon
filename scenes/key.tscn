@@ -11,8 +11,9 @@ size = Vector2(4.07353, 2.80503)
 atlas = ExtResource("2_uha0r")
 region = Rect2(176, 144, 16, 16)
 
-[node name="KeyBody" type="Area2D"]
+[node name="KeyBody" type="Area2D" node_paths=PackedStringArray("keyPickupSound")]
 script = ExtResource("1_ladyr")
+keyPickupSound = NodePath("sfxKeyPickUp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.150726, 0.402512)

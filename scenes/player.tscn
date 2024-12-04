@@ -258,13 +258,15 @@ position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
-[node name="Movement" type="Node" parent="." node_paths=PackedStringArray("body", "controls")]
+[node name="Movement" type="Node" parent="." node_paths=PackedStringArray("body", "controls", "jumpSound", "landSound")]
 script = ExtResource("5_wrwg8")
 body = NodePath("..")
 controls = NodePath("PlayerControlsProvider")
 maxSpeed = 300.0
 acceleration = 1000.0
 jumpStrength = 500.0
+jumpSound = NodePath("../sfxPlayerJump")
+landSound = NodePath("../sfxPlayerLanding")
 
 [node name="PlayerControlsProvider" type="Node" parent="Movement"]
 script = ExtResource("6_1td04")

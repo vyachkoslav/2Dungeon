@@ -76,6 +76,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_jaqta")
 text = "Quit"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -8.134
 
 [connection signal="pressed" from="MenuBG/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MenuBG/VBoxContainer/Options" to="." method="_on_options_pressed"]
