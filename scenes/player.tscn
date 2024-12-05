@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://baqsc14a5pdfv"]
+[gd_scene load_steps=44 format=3 uid="uid://baqsc14a5pdfv"]
 
 [ext_resource type="Script" path="res://scripts/PlayerContext.gd" id="1_ate2h"]
 [ext_resource type="Script" path="res://scripts/AnimationHandler.gd" id="1_mf7c5"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://d0y7d23eiiawh" path="res://art/Sprite_heart.png" id="6_6qyw1"]
 [ext_resource type="Texture2D" uid="uid://1b2ftem3cd4w" path="res://art/Dungeon Tile Set.png" id="7_aalfo"]
 [ext_resource type="Script" path="res://scripts/PlayerDamageHandler.gd" id="9_7e0hd"]
+[ext_resource type="StyleBox" uid="uid://c345q48oxsr4s" path="res://art/styles/menuBG.tres" id="13_5spq4"]
+[ext_resource type="Script" path="res://scripts/PauseMenu.gd" id="13_mw5vc"]
 [ext_resource type="AudioStream" uid="uid://dkl8pgn65lrsj" path="res://sounds/sfx/player_jump.wav" id="13_vjdf7"]
 [ext_resource type="AudioStream" uid="uid://ui2mxvie01qo" path="res://sounds/sfx/player_lading.wav" id="14_vuakk"]
 [ext_resource type="AudioStream" uid="uid://cpe8c07xeh0tr" path="res://sounds/sfx/player_damage.wav" id="15_csih3"]
@@ -282,6 +284,7 @@ context = NodePath("..")
 hearts = [NodePath("../HUD2/Hearts/HBoxContainer/heart"), NodePath("../HUD2/Hearts/HBoxContainer/heart3"), NodePath("../HUD2/Hearts/HBoxContainer/heart2")]
 
 [node name="HUD2" type="CanvasLayer" parent="."]
+process_mode = 3
 
 [node name="Hearts" type="Panel" parent="HUD2"]
 offset_left = 100.0
@@ -335,6 +338,7 @@ scale = Vector2(1.5, 1.5)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
+focus_mode = 0
 text = "PAUSE"
 
 [node name="Key" type="Panel" parent="HUD2"]
@@ -363,6 +367,62 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_bd5mh")
 
+[node name="PausePanel" type="Panel" parent="HUD2" node_paths=PackedStringArray("context", "pause_panel")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -113.0
+offset_right = 128.0
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("13_5spq4")
+script = ExtResource("13_mw5vc")
+context = NodePath("../..")
+pause_panel = NodePath(".")
+
+[node name="Paused" type="Label" parent="HUD2/PausePanel"]
+layout_mode = 2
+offset_left = 88.0
+offset_top = 16.0
+offset_right = 165.0
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 22
+text = "Paused"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD2/PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Resume" type="Button" parent="HUD2/PausePanel/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Main Menu" type="Button" parent="HUD2/PausePanel/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Quit" type="Button" parent="HUD2/PausePanel/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
 [node name="sfxPlayerJump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("13_vjdf7")
 
@@ -374,3 +434,7 @@ stream = ExtResource("15_csih3")
 
 [connection signal="died" from="DamageReceiveArea" to="PlayerDamageHandler" method="_player_died"]
 [connection signal="health_changed" from="DamageReceiveArea" to="PlayerDamageHandler" method="_player_health_changed"]
+[connection signal="pressed" from="HUD2/Pause/PauseButton" to="HUD2/PausePanel" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="HUD2/PausePanel/VBoxContainer/Resume" to="HUD2/PausePanel" method="_on_resume_pressed"]
+[connection signal="pressed" from="HUD2/PausePanel/VBoxContainer/Main Menu" to="HUD2/PausePanel" method="_on_main_menu_pressed"]
+[connection signal="pressed" from="HUD2/PausePanel/VBoxContainer/Quit" to="HUD2/PausePanel" method="_on_quit_pressed"]
