@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @onready var pause_panel: Panel = $PausePanel
+@onready var main_menu: Button = $"PausePanel/VBoxContainer/Main Menu"
 
 
 func resume():
@@ -27,3 +28,8 @@ func _on_pause_button_pressed() -> void:
 		resume()  # If already paused, resume the game
 	else:
 		paused()
+
+
+
+func _on_main_menu_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")
