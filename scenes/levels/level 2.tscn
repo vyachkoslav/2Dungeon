@@ -255,9 +255,10 @@ position = Vector2(-130, 0)
 [node name="Marker2D2" type="Marker2D" parent="Environment/Enemy/Enemy/Waypoints" index="1"]
 position = Vector2(139, 0)
 
-[node name="Player_CharacterBody2D" parent="." node_paths=PackedStringArray("level") instance=ExtResource("4_ebtjq")]
+[node name="Player_CharacterBody2D" parent="." node_paths=PackedStringArray("level", "keyManager") instance=ExtResource("4_ebtjq")]
 position = Vector2(100.517, -155.909)
 level = NodePath("..")
+keyManager = NodePath("../Managers/KeyManager")
 
 [node name="Managers" type="Node" parent="."]
 
