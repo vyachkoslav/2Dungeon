@@ -209,7 +209,7 @@ size = Vector2(10, 82)
 size = Vector2(353, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ddsh"]
-size = Vector2(48, 16)
+size = Vector2(48, 48)
 
 [node name="Level 2" type="Node2D"]
 script = ExtResource("1_xc50r")
@@ -296,11 +296,7 @@ position = Vector2(1529.5, -15)
 shape = SubResource("RectangleShape2D_jjpyf")
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="TrapArea"]
-position = Vector2(1154, -18)
-shape = SubResource("RectangleShape2D_2ddsh")
-
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="TrapArea"]
-position = Vector2(1154, -50)
+position = Vector2(1154, -34)
 shape = SubResource("RectangleShape2D_2ddsh")
 
 [connection signal="body_entered" from="Environment/FinishArea" to="." method="_on_level_finish_entered"]
