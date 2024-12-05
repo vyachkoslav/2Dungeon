@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://8oxka15kc5ky"]
+[gd_scene load_steps=13 format=3 uid="uid://8oxka15kc5ky"]
 
 [ext_resource type="Script" path="res://scripts/GameStateHandler.gd" id="1_xulbl"]
 [ext_resource type="Texture2D" uid="uid://cxhijhhbftmvl" path="res://art/dungeon background 7.png" id="2_xw8ov"]
@@ -6,6 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://yf3u5c54fd5d" path="res://scenes/levels/level 1.tscn" id="3_qu3bv"]
 [ext_resource type="PackedScene" uid="uid://dma3vigfd4m8s" path="res://scenes/game_won.tscn" id="4_7x5wm"]
 [ext_resource type="PackedScene" uid="uid://dj2hwvskxf4l8" path="res://scenes/game_over.tscn" id="5_c7k5m"]
+[ext_resource type="StyleBox" uid="uid://c345q48oxsr4s" path="res://art/styles/menuBG.tres" id="7_avwc2"]
+[ext_resource type="Script" path="res://scripts/Volume.gd" id="7_orvoe"]
+[ext_resource type="PackedScene" uid="uid://2d3ga1chuxoa" path="res://scenes/credits_container.tscn" id="7_qe4is"]
+[ext_resource type="AudioStream" uid="uid://dpjotmh0d5yt5" path="res://sounds/music/idle_music.mp3" id="9_53h6a"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b8xs6"]
+texture_margin_left = 40.0
+texture_margin_top = 20.0
+texture_margin_right = 40.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jaqta"]
 bg_color = Color(1, 0.843137, 0.52549, 1)
@@ -14,7 +23,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="Game" type="Control" node_paths=PackedStringArray("menu", "music_player")]
+[node name="Game" type="Control" node_paths=PackedStringArray("menu", "music_player", "optionsContainer", "creditsContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,6 +38,8 @@ levels = Array[PackedScene]([ExtResource("3_qu3bv"), ExtResource("3_lb8x6")])
 won_screen = ExtResource("4_7x5wm")
 lost_screen = ExtResource("5_c7k5m")
 music_player = NodePath("AudioStreamPlayer")
+optionsContainer = NodePath("MenuBG/OptionsContainer")
+creditsContainer = NodePath("MenuBG/CreditsContainer")
 
 [node name="MenuBG" type="TextureRect" parent="."]
 layout_mode = 1
@@ -39,6 +50,61 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_xw8ov")
 stretch_mode = 6
+
+[node name="CreditsContainer" parent="MenuBG" instance=ExtResource("7_qe4is")]
+layout_mode = 1
+
+[node name="OptionsContainer" type="PanelContainer" parent="MenuBG"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -248.5
+offset_top = -81.0
+offset_right = 248.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("7_avwc2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuBG/OptionsContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="MenuBG/OptionsContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_b8xs6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuBG/OptionsContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="MenuBG/OptionsContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Volume"
+
+[node name="VolumeSlider" type="HSlider" parent="MenuBG/OptionsContainer/VBoxContainer/PanelContainer/VBoxContainer" node_paths=PackedStringArray("audioPlayer")]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+script = ExtResource("7_orvoe")
+audioPlayer = NodePath("../../../../../../AudioStreamPlayer")
+clip = ExtResource("9_53h6a")
+
+[node name="Control" type="Control" parent="MenuBG/OptionsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="MenuBG/OptionsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Close
+"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuBG"]
 layout_mode = 1
@@ -82,6 +148,7 @@ text = "Quit"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -8.134
 
+[connection signal="pressed" from="MenuBG/OptionsContainer/VBoxContainer/CloseButton" to="MenuBG/OptionsContainer" method="set_visible" binds= [false]]
 [connection signal="pressed" from="MenuBG/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MenuBG/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MenuBG/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
