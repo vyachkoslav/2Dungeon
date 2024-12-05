@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dma3vigfd4m8s"]
+[gd_scene load_steps=4 format=3 uid="uid://dma3vigfd4m8s"]
 
 [ext_resource type="Script" path="res://scripts/GameNode.gd" id="1_mrucp"]
+[ext_resource type="PackedScene" uid="uid://2d3ga1chuxoa" path="res://scenes/credits_container.tscn" id="2_x00ec"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fmpoy"]
+font_size = 80
 
 [node name="game_won" type="Node2D"]
 script = ExtResource("1_mrucp")
@@ -9,11 +13,9 @@ script = ExtResource("1_mrucp")
 
 [node name="Control" type="Control" parent="Canvas"]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -26,18 +28,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -183.0
+offset_top = -181.0
+offset_right = 183.0
+offset_bottom = 181.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
+alignment = 1
 
 [node name="Label" type="Label" parent="Canvas/Control/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Game Won
+text = "You Won
 Thanks for playing!"
 horizontal_alignment = 1
 
@@ -57,5 +60,33 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Quit"
 
+[node name="CreditsContainer" parent="Canvas/Control" instance=ExtResource("2_x00ec")]
+visible = true
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Label" parent="Canvas/Control/CreditsContainer/Control" index="0"]
+offset_left = -387.0
+offset_top = 119.0
+offset_right = 387.0
+offset_bottom = 794.0
+label_settings = SubResource("LabelSettings_fmpoy")
+
+[node name="CloseButton" parent="Canvas/Control/CreditsContainer/Control" index="1"]
+offset_left = -66.0
+offset_top = -121.0
+offset_right = 67.0
+offset_bottom = -59.0
+
 [connection signal="pressed" from="Canvas/Control/VBoxContainer/VBoxContainer2/MainMenu" to="." method="return_to_menu"]
 [connection signal="pressed" from="Canvas/Control/VBoxContainer/VBoxContainer2/Quit" to="." method="quit_game"]
+
+[editable path="Canvas/Control/CreditsContainer"]

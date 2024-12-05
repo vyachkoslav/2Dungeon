@@ -5,6 +5,8 @@ class_name GameStateHandler extends Control
 @export var won_screen: PackedScene
 @export var lost_screen: PackedScene
 @export var music_player: AudioStreamPlayer
+@export var optionsContainer: Node
+@export var creditsContainer: Node
 
 var _current_level: int = 0
 var _current_node: GameNode
@@ -25,8 +27,8 @@ func _start_level(index: int) -> void:
 	_start_node(levels[index])
 	
 func _on_start_pressed() -> void:
-	$OptionsContainer.visible = false
-	$CreditsContainer.visible = false
+	optionsContainer.visible = false
+	creditsContainer.visible = false
 	_current_level = 0
 	menu.visible = false
 	_start_level(_current_level)
@@ -39,13 +41,13 @@ func _on_quit_pressed() -> void:
 
 
 func _on_options_pressed() -> void:
-	$OptionsContainer.visible = !$OptionsContainer.visible
-	$CreditsContainer.visible = false
+	optionsContainer.visible = !optionsContainer.visible
+	creditsContainer.visible = false
 	
 
 func _on_credits_pressed() -> void:
-	$CreditsContainer.visible = !$CreditsContainer.visible
-	$OptionsContainer.visible = false
+	creditsContainer.visible = !creditsContainer.visible
+	optionsContainer.visible = false
 	
 func _stop_current_node() -> void:
 	if(_current_node == null): return
