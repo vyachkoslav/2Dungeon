@@ -279,10 +279,16 @@ script = ExtResource("1_mf7c5")
 animatedSprite = NodePath("../AnimatedSprite2D")
 body = NodePath("..")
 
-[node name="PlayerDamageHandler" type="Node" parent="." node_paths=PackedStringArray("context", "hearts")]
+[node name="PlayerDamageHandler" type="Node" parent="." node_paths=PackedStringArray("context", "playerGraphics", "hearts", "dmgReceive", "blink_timer")]
 script = ExtResource("9_7e0hd")
 context = NodePath("..")
+playerGraphics = NodePath("../AnimatedSprite2D")
 hearts = [NodePath("../HUD2/Hearts/HBoxContainer/heart"), NodePath("../HUD2/Hearts/HBoxContainer/heart3"), NodePath("../HUD2/Hearts/HBoxContainer/heart2")]
+dmgReceive = NodePath("../DamageReceiveArea")
+blink_timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="PlayerDamageHandler"]
+wait_time = 0.1
 
 [node name="HUD2" type="CanvasLayer" parent="."]
 process_mode = 3
