@@ -3,11 +3,13 @@ class_name DamageReceiveArea extends Area2D
 @export var body: Node
 @export var thisAttacker: DamageArea
 @export var health: int
+@export var receive_damage: bool = true
 
 signal died
 signal health_changed(oldHP: int, newHP: int)
 
 func _area_entered(node: Node2D):
+	if not receive_damage: return
 	if(node is DamageArea && node != thisAttacker):
 		var old = health
 		health -= (node as DamageArea).damage
