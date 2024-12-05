@@ -205,5 +205,6 @@ body = NodePath("..")
 
 [node name="sfxEnemyDeath" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_37q5w")
+volume_db = 8.0
 
 [connection signal="died" from="Enemy_CharacterBody2D/DamageReceiveArea" to="sfxEnemyDeath" method="play"]

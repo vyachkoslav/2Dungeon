@@ -371,6 +371,7 @@ stream = ExtResource("14_vuakk")
 
 [node name="sfxPlayerDamage" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("15_csih3")
+volume_db = 5.0
 
 [connection signal="died" from="DamageReceiveArea" to="PlayerDamageHandler" method="_player_died"]
 [connection signal="health_changed" from="DamageReceiveArea" to="PlayerDamageHandler" method="_player_health_changed"]

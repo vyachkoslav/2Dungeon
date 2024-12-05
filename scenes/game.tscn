@@ -225,6 +225,7 @@ position = Vector2(33, -30)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_1teve")
+volume_db = -15.0
 autoplay = true
 
 [node name="KeyBody" parent="." node_paths=PackedStringArray("keyManager") instance=ExtResource("4_rhcao")]
