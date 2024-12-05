@@ -324,21 +324,11 @@ size_flags_horizontal = 8
 texture = ExtResource("6_6qyw1")
 expand_mode = 2
 
-[node name="Pause" type="Panel" parent="HUD2"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -140.0
+[node name="PauseButton" type="Button" parent="HUD2"]
+offset_left = 1780.0
 offset_top = 50.0
-offset_right = -100.0
-offset_bottom = 90.0
-grow_horizontal = 0
-scale = Vector2(1.5, 1.5)
-
-[node name="PauseButton" type="Button" parent="HUD2/Pause"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_right = 1839.0
+offset_bottom = 81.0
 focus_mode = 0
 text = "PAUSE"
 
@@ -439,7 +429,7 @@ volume_db = 5.0
 
 [connection signal="died" from="DamageReceiveArea" to="PlayerDamageHandler" method="_player_died"]
 [connection signal="health_changed" from="DamageReceiveArea" to="PlayerDamageHandler" method="_player_health_changed"]
-[connection signal="pressed" from="HUD2/Pause/PauseButton" to="HUD2/PausePanel" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="HUD2/PauseButton" to="HUD2/PausePanel" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="HUD2/PausePanel/VBoxContainer/Resume" to="HUD2/PausePanel" method="_on_resume_pressed"]
 [connection signal="pressed" from="HUD2/PausePanel/VBoxContainer/Main Menu" to="HUD2/PausePanel" method="_on_main_menu_pressed"]
 [connection signal="pressed" from="HUD2/PausePanel/VBoxContainer/Quit" to="HUD2/PausePanel" method="_on_quit_pressed"]
