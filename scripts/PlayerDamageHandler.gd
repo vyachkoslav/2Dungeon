@@ -8,7 +8,7 @@ extends Node
 
 
 @export var times_blink_onhit: int = 3
-@export var delay_between_blinks: float = 0.1
+@export var blink_timer: Timer
 var times_left: int
 
 func _player_health_changed(oldHP: int, newHP: int) -> void:
@@ -32,10 +32,12 @@ func _player_died() -> void:
 
 func _play_damage_animation() -> void:
 	dmgReceive.receive_damage = false
+	blink_timer.start()
 	while times_left > 0:
 		playerGraphics.visible = false
-		await get_tree().create_timer(delay_between_blinks).timeout
+		await blink_timer.timeout
 		playerGraphics.visible = true
-		await get_tree().create_timer(delay_between_blinks).timeout
+		await blink_timer.timeout
 		times_left -= 1
+	blink_timer.stop()
 	dmgReceive.receive_damage = true
