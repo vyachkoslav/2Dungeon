@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://660rptxlg7dj"]
+[gd_scene load_steps=20 format=4 uid="uid://660rptxlg7dj"]
 
 [ext_resource type="PackedScene" uid="uid://d1crvgavmwo2l" path="res://scenes/door.tscn" id="1_g6ddo"]
 [ext_resource type="Script" path="res://scripts/Level.gd" id="1_xc50r"]
@@ -208,6 +208,9 @@ size = Vector2(10, 82)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jjpyf"]
 size = Vector2(353, 10)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ddsh"]
+size = Vector2(48, 16)
+
 [node name="Level 2" type="Node2D"]
 script = ExtResource("1_xc50r")
 music = ExtResource("5_7701s")
@@ -255,9 +258,10 @@ position = Vector2(-130, 0)
 [node name="Marker2D2" type="Marker2D" parent="Environment/Enemy/Enemy/Waypoints" index="1"]
 position = Vector2(139, 0)
 
-[node name="Player_CharacterBody2D" parent="." node_paths=PackedStringArray("level") instance=ExtResource("4_ebtjq")]
+[node name="Player_CharacterBody2D" parent="." node_paths=PackedStringArray("level", "keyManager") instance=ExtResource("4_ebtjq")]
 position = Vector2(100.517, -155.909)
 level = NodePath("..")
+keyManager = NodePath("../Managers/KeyManager")
 
 [node name="Managers" type="Node" parent="."]
 
@@ -290,6 +294,14 @@ shape = SubResource("RectangleShape2D_10fwi")
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="TrapArea"]
 position = Vector2(1529.5, -15)
 shape = SubResource("RectangleShape2D_jjpyf")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="TrapArea"]
+position = Vector2(1154, -18)
+shape = SubResource("RectangleShape2D_2ddsh")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="TrapArea"]
+position = Vector2(1154, -50)
+shape = SubResource("RectangleShape2D_2ddsh")
 
 [connection signal="body_entered" from="Environment/FinishArea" to="." method="_on_level_finish_entered"]
 

@@ -220,9 +220,10 @@ position = Vector2(1128.1, -226.733)
 position = Vector2(21.3502, 69.6703)
 shape = SubResource("RectangleShape2D_crbia")
 
-[node name="Player_CharacterBody2D" parent="." node_paths=PackedStringArray("level") instance=ExtResource("4_eemic")]
+[node name="Player_CharacterBody2D" parent="." node_paths=PackedStringArray("level", "keyManager") instance=ExtResource("4_eemic")]
 position = Vector2(51.9887, -557.223)
 level = NodePath("..")
+keyManager = NodePath("../Managers/KeyManager")
 
 [node name="Managers" type="Node" parent="."]
 

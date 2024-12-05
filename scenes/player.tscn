@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://baqsc14a5pdfv"]
+[gd_scene load_steps=45 format=3 uid="uid://baqsc14a5pdfv"]
 
 [ext_resource type="Script" path="res://scripts/PlayerContext.gd" id="1_ate2h"]
 [ext_resource type="Script" path="res://scripts/AnimationHandler.gd" id="1_mf7c5"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://d0y7d23eiiawh" path="res://art/Sprite_heart.png" id="6_6qyw1"]
 [ext_resource type="Texture2D" uid="uid://1b2ftem3cd4w" path="res://art/Dungeon Tile Set.png" id="7_aalfo"]
 [ext_resource type="Script" path="res://scripts/PlayerDamageHandler.gd" id="9_7e0hd"]
+[ext_resource type="Script" path="res://scripts/KeyHUD.gd" id="12_jfh6x"]
 [ext_resource type="StyleBox" uid="uid://c345q48oxsr4s" path="res://art/styles/menuBG.tres" id="13_5spq4"]
 [ext_resource type="Script" path="res://scripts/PauseMenu.gd" id="13_mw5vc"]
 [ext_resource type="AudioStream" uid="uid://dkl8pgn65lrsj" path="res://sounds/sfx/player_jump.wav" id="13_vjdf7"]
@@ -323,25 +324,15 @@ size_flags_horizontal = 8
 texture = ExtResource("6_6qyw1")
 expand_mode = 2
 
-[node name="Pause" type="Panel" parent="HUD2"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -140.0
+[node name="PauseButton" type="Button" parent="HUD2"]
+offset_left = 1780.0
 offset_top = 50.0
-offset_right = -100.0
-offset_bottom = 90.0
-grow_horizontal = 0
-scale = Vector2(1.5, 1.5)
-
-[node name="PauseButton" type="Button" parent="HUD2/Pause"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_right = 1839.0
+offset_bottom = 81.0
 focus_mode = 0
 text = "PAUSE"
 
-[node name="Key" type="Panel" parent="HUD2"]
+[node name="Key" type="Panel" parent="HUD2" node_paths=PackedStringArray("context")]
 visible = false
 anchors_preset = 5
 anchor_left = 0.5
@@ -351,6 +342,8 @@ offset_top = 50.0
 offset_right = -421.0
 offset_bottom = 115.0
 grow_horizontal = 2
+script = ExtResource("12_jfh6x")
+context = NodePath("../..")
 
 [node name="key" type="TextureRect" parent="HUD2/Key"]
 layout_mode = 1
@@ -368,6 +361,7 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_bd5mh")
 
 [node name="PausePanel" type="Panel" parent="HUD2" node_paths=PackedStringArray("context", "pause_panel")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -435,7 +429,7 @@ volume_db = 5.0
 
 [connection signal="died" from="DamageReceiveArea" to="PlayerDamageHandler" method="_player_died"]
 [connection signal="health_changed" from="DamageReceiveArea" to="PlayerDamageHandler" method="_player_health_changed"]
-[connection signal="pressed" from="HUD2/Pause/PauseButton" to="HUD2/PausePanel" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="HUD2/PauseButton" to="HUD2/PausePanel" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="HUD2/PausePanel/VBoxContainer/Resume" to="HUD2/PausePanel" method="_on_resume_pressed"]
 [connection signal="pressed" from="HUD2/PausePanel/VBoxContainer/Main Menu" to="HUD2/PausePanel" method="_on_main_menu_pressed"]
 [connection signal="pressed" from="HUD2/PausePanel/VBoxContainer/Quit" to="HUD2/PausePanel" method="_on_quit_pressed"]
