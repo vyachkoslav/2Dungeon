@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://8oxka15kc5ky"]
+[gd_scene load_steps=15 format=3 uid="uid://8oxka15kc5ky"]
 
 [ext_resource type="Script" path="res://scripts/GameStateHandler.gd" id="1_xulbl"]
 [ext_resource type="Texture2D" uid="uid://cxhijhhbftmvl" path="res://art/dungeon background 7.png" id="2_xw8ov"]
@@ -6,11 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://yf3u5c54fd5d" path="res://scenes/levels/level 1.tscn" id="3_qu3bv"]
 [ext_resource type="PackedScene" uid="uid://dma3vigfd4m8s" path="res://scenes/game_won.tscn" id="4_7x5wm"]
 [ext_resource type="PackedScene" uid="uid://dj2hwvskxf4l8" path="res://scenes/game_over.tscn" id="5_c7k5m"]
-[ext_resource type="Texture2D" uid="uid://ca5adkpwwjilj" path="res://art/luuranki-name.png" id="7_6futq"]
+[ext_resource type="FontFile" uid="uid://cuslwe86ycy1o" path="res://art/font/dpcomic.ttf" id="7_8x45a"]
 [ext_resource type="StyleBox" uid="uid://c345q48oxsr4s" path="res://art/styles/menuBG.tres" id="7_avwc2"]
 [ext_resource type="Script" path="res://scripts/Volume.gd" id="7_orvoe"]
 [ext_resource type="PackedScene" uid="uid://2d3ga1chuxoa" path="res://scenes/credits_container.tscn" id="7_qe4is"]
 [ext_resource type="AudioStream" uid="uid://dpjotmh0d5yt5" path="res://sounds/music/idle_music.mp3" id="9_53h6a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tc0ca"]
+font = ExtResource("7_8x45a")
+font_size = 200
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b8xs6"]
 texture_margin_left = 40.0
@@ -45,7 +51,7 @@ creditsContainer = NodePath("CanvasLayer/MenuBG/CreditsContainer")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MenuBG" type="TextureRect" parent="CanvasLayer"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 3.0
@@ -58,22 +64,20 @@ texture = ExtResource("2_xw8ov")
 expand_mode = 2
 stretch_mode = 6
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MenuBG"]
+[node name="Label" type="Label" parent="CanvasLayer/MenuBG"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -584.0
-offset_top = -359.0
-offset_right = -129.0
-offset_bottom = -277.0
+offset_left = -483.0
+offset_top = 175.0
+offset_right = 484.0
+offset_bottom = 380.0
 grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(2.55659, 2.55659)
-texture = ExtResource("7_6futq")
-stretch_mode = 5
+text = "LUURANKI"
+label_settings = SubResource("LabelSettings_tc0ca")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CreditsContainer" parent="CanvasLayer/MenuBG" instance=ExtResource("7_qe4is")]
 layout_mode = 1
