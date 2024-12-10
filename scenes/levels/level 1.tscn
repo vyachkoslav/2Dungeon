@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://yf3u5c54fd5d"]
+[gd_scene load_steps=21 format=4 uid="uid://yf3u5c54fd5d"]
 
 [ext_resource type="PackedScene" uid="uid://d1crvgavmwo2l" path="res://scenes/door.tscn" id="1_oe7kb"]
 [ext_resource type="Texture2D" uid="uid://1b2ftem3cd4w" path="res://art/Dungeon Tile Set.png" id="2_jr3kq"]
@@ -6,7 +6,9 @@
 [ext_resource type="Script" path="res://scripts/Level.gd" id="4_0yjl3"]
 [ext_resource type="PackedScene" uid="uid://baqsc14a5pdfv" path="res://scenes/player.tscn" id="4_eemic"]
 [ext_resource type="AudioStream" uid="uid://dpjotmh0d5yt5" path="res://sounds/music/idle_music.mp3" id="5_6hcte"]
+[ext_resource type="FontFile" uid="uid://xfclmbl8hl83" path="res://art/font/yoster.ttf" id="6_3buj7"]
 [ext_resource type="Script" path="res://scripts/KeyManager.cs" id="6_k22wn"]
+[ext_resource type="Script" path="res://scripts/AppearingLabel.gd" id="7_3jkcg"]
 [ext_resource type="PackedScene" uid="uid://bsoxijuk0gbe0" path="res://scenes/enemy.tscn" id="7_mya8p"]
 [ext_resource type="Script" path="res://scripts/DamageArea.gd" id="10_rwpek"]
 
@@ -187,6 +189,23 @@ sources/0 = SubResource("TileSetAtlasSource_10ysk")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_crbia"]
 size = Vector2(62.7004, 159.341)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qf7qc"]
+size = Vector2(208, 112)
+
+[sub_resource type="LabelSettings" id="LabelSettings_w6ivw"]
+font = ExtResource("6_3buj7")
+font_size = 50
+font_color = Color(1, 0.290196, 0.678431, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ke6x7"]
+size = Vector2(143, 146)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j64y2"]
+size = Vector2(367, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxnh4"]
+size = Vector2(127, 115)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lhgof"]
 size = Vector2(161, 9)
 
@@ -220,6 +239,137 @@ position = Vector2(1128.1, -226.733)
 position = Vector2(21.3502, 69.6703)
 shape = SubResource("RectangleShape2D_crbia")
 
+[node name="HintControls" type="Node2D" parent="Environment"]
+
+[node name="HintArea" type="Area2D" parent="Environment/HintControls"]
+position = Vector2(114, -65)
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/HintControls/HintArea"]
+position = Vector2(5, 0)
+shape = SubResource("RectangleShape2D_qf7qc")
+
+[node name="Control Hint" type="Label" parent="Environment/HintControls" node_paths=PackedStringArray("appearTimer")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = -76.0
+offset_right = 900.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.224539, 0.224539)
+text = "Use WASD/Arrow buttons to move
+Space to jump"
+label_settings = SubResource("LabelSettings_w6ivw")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_3jkcg")
+appearTimer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="Environment/HintControls/Control Hint"]
+wait_time = 0.1
+
+[node name="HintTraps" type="Node2D" parent="Environment"]
+position = Vector2(185, -61)
+
+[node name="HintArea" type="Area2D" parent="Environment/HintTraps"]
+position = Vector2(114, -65)
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/HintTraps/HintArea"]
+position = Vector2(-20.5, -20)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_ke6x7")
+
+[node name="Control Hint" type="Label" parent="Environment/HintTraps" node_paths=PackedStringArray("appearTimer")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 164.0
+offset_top = -152.0
+offset_right = 837.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.224539, 0.224539)
+text = "Don't fall into the traps"
+label_settings = SubResource("LabelSettings_w6ivw")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_3jkcg")
+appearTimer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="Environment/HintTraps/Control Hint"]
+wait_time = 0.1
+
+[node name="HintEnemy" type="Node2D" parent="Environment"]
+position = Vector2(537, 3)
+
+[node name="HintArea" type="Area2D" parent="Environment/HintEnemy"]
+position = Vector2(114, -65)
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/HintEnemy/HintArea"]
+position = Vector2(44.5, -28)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_j64y2")
+
+[node name="Control Hint" type="Label" parent="Environment/HintEnemy" node_paths=PackedStringArray("appearTimer")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = -174.0
+offset_right = 730.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.224539, 0.224539)
+text = "Jump on enemy to kill it"
+label_settings = SubResource("LabelSettings_w6ivw")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_3jkcg")
+appearTimer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="Environment/HintEnemy/Control Hint"]
+wait_time = 0.1
+
+[node name="Hint Keys and Doors" type="Node2D" parent="Environment"]
+position = Vector2(802, -53)
+
+[node name="HintArea" type="Area2D" parent="Environment/Hint Keys and Doors"]
+position = Vector2(114, -65)
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Hint Keys and Doors/HintArea"]
+position = Vector2(27.5, -28.5)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_hxnh4")
+
+[node name="Control Hint" type="Label" parent="Environment/Hint Keys and Doors" node_paths=PackedStringArray("appearTimer")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 103.0
+offset_top = -16.0
+offset_right = 1356.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.224539, 0.224539)
+text = "You need to pickup the key to open that door"
+label_settings = SubResource("LabelSettings_w6ivw")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_3jkcg")
+appearTimer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="Environment/Hint Keys and Doors/Control Hint"]
+wait_time = 0.1
+
 [node name="Player_CharacterBody2D" parent="." node_paths=PackedStringArray("level", "keyManager") instance=ExtResource("4_eemic")]
 position = Vector2(51.9887, -557.223)
 level = NodePath("..")
@@ -247,5 +397,12 @@ position = Vector2(431.5, -14.5)
 shape = SubResource("RectangleShape2D_lhgof")
 
 [connection signal="body_entered" from="Environment/FinishArea" to="." method="_on_level_finish_entered"]
+[connection signal="body_entered" from="Environment/HintControls/HintArea" to="Environment/HintControls/Control Hint" method="_on_hint_area_body_entered"]
+[connection signal="body_entered" from="Environment/HintTraps/HintArea" to="Environment/HintControls/Control Hint" method="_on_next_hint_entered"]
+[connection signal="body_entered" from="Environment/HintTraps/HintArea" to="Environment/HintTraps/Control Hint" method="_on_hint_area_body_entered"]
+[connection signal="body_entered" from="Environment/HintEnemy/HintArea" to="Environment/HintTraps/Control Hint" method="_on_next_hint_entered"]
+[connection signal="body_entered" from="Environment/HintEnemy/HintArea" to="Environment/HintEnemy/Control Hint" method="_on_hint_area_body_entered"]
+[connection signal="body_entered" from="Environment/Hint Keys and Doors/HintArea" to="Environment/HintEnemy/Control Hint" method="_on_next_hint_entered"]
+[connection signal="body_entered" from="Environment/Hint Keys and Doors/HintArea" to="Environment/Hint Keys and Doors/Control Hint" method="_on_hint_area_body_entered"]
 
 [editable path="Enemy"]

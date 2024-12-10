@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://660rptxlg7dj"]
+[gd_scene load_steps=23 format=4 uid="uid://660rptxlg7dj"]
 
 [ext_resource type="PackedScene" uid="uid://d1crvgavmwo2l" path="res://scenes/door.tscn" id="1_g6ddo"]
 [ext_resource type="Script" path="res://scripts/Level.gd" id="1_xc50r"]
@@ -8,6 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://dpjotmh0d5yt5" path="res://sounds/music/idle_music.mp3" id="5_7701s"]
 [ext_resource type="Script" path="res://scripts/KeyManager.cs" id="6_jmcvf"]
 [ext_resource type="PackedScene" uid="uid://bsoxijuk0gbe0" path="res://scenes/enemy.tscn" id="7_48om7"]
+[ext_resource type="FontFile" uid="uid://xfclmbl8hl83" path="res://art/font/yoster.ttf" id="7_htu83"]
+[ext_resource type="Script" path="res://scripts/AppearingLabel.gd" id="8_7unkc"]
 [ext_resource type="Script" path="res://scripts/DamageArea.gd" id="9_8diiv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10ysk"]
@@ -190,6 +192,11 @@ sources/0 = SubResource("TileSetAtlasSource_10ysk")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mov0q"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_bcwgs"]
+font = ExtResource("7_htu83")
+font_size = 50
+font_color = Color(1, 0.290196, 0.678431, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxl13"]
 size = Vector2(10, 128)
 
@@ -258,6 +265,29 @@ position = Vector2(-130, 0)
 [node name="Marker2D2" type="Marker2D" parent="Environment/Enemy/Enemy/Waypoints" index="1"]
 position = Vector2(139, 0)
 
+[node name="HintLuck" type="Node2D" parent="Environment"]
+
+[node name="Control Hint" type="Label" parent="Environment/HintLuck" node_paths=PackedStringArray("appearTimer")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -187.0
+offset_right = 931.0
+offset_bottom = -66.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.224539, 0.224539)
+text = "Good luck!"
+label_settings = SubResource("LabelSettings_bcwgs")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("8_7unkc")
+appearTimer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="Environment/HintLuck/Control Hint"]
+wait_time = 0.1
+
 [node name="Player_CharacterBody2D" parent="." node_paths=PackedStringArray("level", "keyManager") instance=ExtResource("4_ebtjq")]
 position = Vector2(89, -155)
 level = NodePath("..")
@@ -300,6 +330,7 @@ position = Vector2(1154, -34)
 shape = SubResource("RectangleShape2D_2ddsh")
 
 [connection signal="body_entered" from="Environment/FinishArea" to="." method="_on_level_finish_entered"]
+[connection signal="ready" from="Environment/HintLuck/Control Hint" to="Environment/HintLuck/Control Hint" method="text_appear"]
 
 [editable path="Environment/Enemy"]
 [editable path="Environment/Enemy/Enemy"]
